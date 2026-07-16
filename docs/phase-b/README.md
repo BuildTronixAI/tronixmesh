@@ -2,8 +2,7 @@
 
 | Doc | Purpose |
 |-----|---------|
-| [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) | Production plan v1.2 — Gate 0, proof-native schema, capacity, IP |
-| [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) | Adversarial validation + refinement disposition |
-| [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) | Map concerns to existing doctrine before new gates |
+| [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) | Adversarial validation of the May 2026 draft plan |
+| [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) | Production-hardened Phase B plan (sign-off target) |
 
-**Kickoff blocked** until Gate 0 (eight decisions) in the build plan is signed.
+**Kickoff is blocked** until §0 questions in the build plan are answered.
