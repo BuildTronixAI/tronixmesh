@@ -1,107 +1,86 @@
 # Phase B Plan — Validation Report
 
-**Document type:** Adversarial validation of *Tronix Mesh — Phase B Inner-First Build Plan* (Draft)  
-**Validated against:** v1.1 Architecture, Engineering Integration Guide v1.0, Peer Review Final v1.0, Doctrine Bundle v1.1, Whitepaper/v2.3, Flowchart v1.0  
+**Document type:** Adversarial validation + critique evolution  
 **Date:** 2026-07-16  
-**Status:** Draft not execution-ready; production plan updated through **v1.2** after founder refinement  
-**Plan:** [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) · Traceability: [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md)
+**Plan version:** Production **v1.3**  
+**Artifacts:** [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
 
 ---
 
-## Verdict
+## Meta-assessment (stronger critique)
 
-Mission, workflow, out-of-scope discipline, and M/F/A priority are sound. The May draft is not kickoff-ready (stale calendar, underspecified authority, unmeetable classifier SLO, missing ops/IP/capacity).
+**Rating (founder review): 9.5/10** — evaluates recommendations against actual architecture and operating model, not generic enterprise practice.
 
-**Refinement accepted (Chris, 2026-07-16):** generic big-company process was over-weighted; proof fields are **not** orthogonal to the data model; doctrine should be mapped before new gates; capacity displacement and IP posture are first-class.
+Three architectural issues with real downstream cost if ignored:
 
----
+1. **Schema evolution risk** — proof model precedes envelope/storage/interfaces.  
+2. **Organizational mismatch** — capacity/scheduling beats invented governance.  
+3. **IP / governance risk** — implementation visibility is an IP decision.
 
-## What Holds
-
-| Item | Why |
-|------|-----|
-| Inner-first handoff mission | v1.1 §6; RTP pressure |
-| Competitive intel 3-agent + one boundary | Real value, representative, repeatable |
-| Hard out-of-scope | Protects ship |
-| M/F/A primary; P secondary within 2× | Correct ordering |
-| Fail-closed + provenance survives failure | Doctrine + v1.1 §8.5 |
-| Eval set as contract | Measurability |
-| Clear accountability | Valid — **implementation lightened** for founder-scale |
+Highest ROI process fix: **map existing doctrine** before new checklists.
 
 ---
 
-## Critical Defects (Original Draft)
+## Verdict on original Phase B draft
 
-### C1 — Schedule stale
-May 30, 2026 target vs validation date 2026-07-16 → rebaselined to T0+30.
-
-### C2 — Substrate dualism → **refined disposition**
-v1.1 envelope/grid vs v2.3 MeshResolver/ProofPackage remain distinct **behaviors**, but proof is **not** safely deferred if it is part of the data model.
-
-**Wrong recommendation (earlier pass):** “defer ProofPackage entirely / v1.1-only.”  
-**Corrected recommendation:** **proof-native schema now, proof-enabled behavior later.**
-
-| Design now | Enable later |
-|------------|--------------|
-| Envelope schema | Proof verification |
-| Proof fields / refs | Mesh resolution hot path |
-| Signature blocks | Distributed enforcement |
-| Versioning | Cross-node consensus |
-
-Narrow claim: if patentable differentiation depends on proof and governance, preserve those capabilities in schema/interfaces from the outset — without implementing every verification path in Phase B.
-
-### C3 — Ownership → **refined disposition**
-Unassigned owners remain a blocker. **Rejected:** four owners/component, architecture board, formal committees.  
-**Adopted:** Chris (architecture + ops), Robert (runtime), peer/council security review before release.
-
-### C4 — Authority at public→confidential underspecified
-Still requires Phase B minimal authority (bootstrap/static grant). Decision Tokens stay Phase C.
-
-### C5 — Classifier latency vs Haiku
-Split P1a (rules) / P1b (LLM escalate).
-
-### C6 — “No new infra” vs proposed stack
-Inventory Vultr first; document downgrades.
+Mission, workflow, out-of-scope, and M/F/A priority are sound. Draft was not kickoff-ready (stale calendar, underspecified authority, unmeetable classifier SLO as written, missing ops/IP/capacity).
 
 ---
 
-## High Gaps — Disposition After Refinement
+## Disposition of recommendations
 
-| Gap | Disposition |
-|-----|-------------|
-| Idempotency / delivery semantics | Kept in plan §3.3 / F9 |
-| Security / threat model | Prefer doctrine map; add only Open rows (injection suite, ACL, secrets path) |
-| Observability | Open in traceability → short pilot note, not new doctrine |
-| Runbooks / kill switch | Kept; map halt semantics to doctrine where possible |
-| Eval contract | Kept |
-| CI / restore drill | Kept |
-| Cost reconcile | Gate 0.7 |
-| Repo / packaging | Folded into Gate 0.6 IP + private eng default for RTP |
-| **IP posture** | **Added** — disclosure vs non-provisional, trade secret, private repos |
-| **Capacity displacement** | **Added** — Robert/TronixMesh vs Pre-Con, Clover, AMS, FedTronix, Carl’s Wine Vault |
-| **Doctrine-first gates** | **Added** — traceability matrix before new S/O paperwork |
+### Proof-native schema (most important)
+
+| Wrong framing | Correct framing |
+|---------------|-----------------|
+| Envelope → later add proof | Proof model → Envelope schema → Storage → Interfaces → Behavior |
+
+- Schema is proof-native.  
+- Behavior is feature-flagged.  
+- Narrow claim only: preserve proof/governance capability in schema; do not require every verify path in v1.
+
+### Organization / capacity
+
+Enterprise drift (architecture board, four owners, SBOM as Gate 0) rejected for Phase B.  
+**Primary question:** Who builds this, and what stops while they do? → Gate 0.5 scheduling table.
+
+### IP posture (legal nuance)
+
+Distinguish:
+
+- **Patent rights** — disclosure timing/content; U.S. vs international; coordinate with counsel.  
+- **Trade secrets** — public implementation detail generally destroys protection for that detail.
+
+Operational default: keep implementation-specific material private until counsel approves.  
+**Avoid categorical legal claims** beyond that without attorney input.
+
+### Doctrine mapping
+
+Traceability matrix separates Covered / Partial / Verify / Gap. Duplicate documentation discouraged.
+
+### Kept from original review
+
+- FP/FN classifier objectives (§4.1a)  
+- Approved / rejected / experimental technology registry  
+- Staged rollout R1→R4 (synthetic → internal → trusted → production)  
+- Gate 0 as decision point  
+
+### Added
+
+- **ADR Gate 0.9** — irreversible decisions (Ed25519, proof-native, LangGraph, Postgres, cell memory) without a formal board.
 
 ---
 
-## Process Corrections
+## Final disposition
 
-| Heavyweight advice | Founder-scale substitute |
-|--------------------|---------------------------|
-| Architecture board | Chris freezes schemas (Gate 0.1) |
-| Multi-owner RACI matrix | Single owner per subsystem |
-| Standing security committee | Peer/council review before release |
-| Long Q1–Q10 wall | Streamlined **Gate 0** (8 decisions) |
-| “Embedded enforcement proof is the product” | Preserve proof/governance capability in schema; phase enablement |
+Treat this critique lineage as the stronger review. Plan **v1.3** encodes it:
 
----
+- Architecturally: proof into the schema, not only the implementation.  
+- Operationally: founder-led team, not large-eng process.  
+- Strategically: implementation visibility as IP decision (counsel-aware).  
+- Practically: doctrine map before new requirements; smaller Gate 0; higher signal.
 
-## Recommended Disposition
-
-1. Keep mission, workflow, M/F/A structure.  
-2. Execute against plan **v1.2** (proof-native, Gate 0, capacity, IP).  
-3. Close Gate 0 before counting build days.  
-4. Use [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) to avoid duplicate docs.  
-5. Do not market Phase B as Doctrine-1B crypto-certified.
+**Next:** Close Gate 0 (especially 0.5 capacity, 0.6 IP with counsel as needed, 0.9 ADRs 0004/0005).
 
 ---
 
