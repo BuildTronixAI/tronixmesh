@@ -3,143 +3,105 @@
 **Document type:** Adversarial validation of *Tronix Mesh — Phase B Inner-First Build Plan* (Draft)  
 **Validated against:** v1.1 Architecture, Engineering Integration Guide v1.0, Peer Review Final v1.0, Doctrine Bundle v1.1, Whitepaper/v2.3, Flowchart v1.0  
 **Date:** 2026-07-16  
-**Validator:** Cursor cloud agent (Production plan validation)  
-**Status:** Plan is directionally correct; **not execution-ready** as written
+**Status:** Draft not execution-ready; production plan updated through **v1.2** after founder refinement  
+**Plan:** [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) · Traceability: [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md)
 
 ---
 
 ## Verdict
 
-The Phase B mission is right: prove the handoff primitive under failure before fractal topology theater. The selected workflow, out-of-scope list, and M/F/A gate structure are sound.
+Mission, workflow, out-of-scope discipline, and M/F/A priority are sound. The May draft is not kickoff-ready (stale calendar, underspecified authority, unmeetable classifier SLO, missing ops/IP/capacity).
 
-The draft is **not production-grade / bulletproof**. It cannot be kicked off until schedule, architecture identity, ownership, authority model, and ops/security gaps below are resolved. An updated plan is in [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md).
-
----
-
-## What Holds (Keep)
-
-| Item | Why it survives |
-|------|-----------------|
-| Inner-first / handoff-first mission | Matches v1.1 §6 and peer-review reduction-to-practice pressure |
-| Competitive intel 3-agent chain + one sensitivity boundary | Real business value, one representative boundary, repeatable |
-| Hard out-of-scope (cross-tenant, Decision Tokens, personas, streaming) | Protects a credible ship |
-| M / F / A primary gates; P secondary within 2× | Correct priority ordering |
-| Fail-closed + provenance-survives-failure principles | Aligns with doctrine and v1.1 §8.5 |
-| Eval set as first-class artifact | Without labels, criteria are subjective |
-| Owners-unassigned as kickoff blocker | Correct; still open |
+**Refinement accepted (Chris, 2026-07-16):** generic big-company process was over-weighted; proof fields are **not** orthogonal to the data model; doctrine should be mapped before new gates; capacity displacement and IP posture are first-class.
 
 ---
 
-## Critical Defects (Must Fix Before Kickoff)
+## What Holds
 
-### C1 — Schedule is stale
-Draft targets **May 30, 2026 soft launch**. Validation date is **2026-07-16**. Soft-launch date and day-numbered dependency graph must be rebaselined. Treating the original calendar as live is false precision.
-
-### C2 — Two incompatible substrate stories
-Documents in the corpus describe **different systems** under one brand:
-
-| Axis | v1.1 + Phase B draft | v2.3 / Eng Guide / Peer Review / Doctrine |
-|------|----------------------|-------------------------------------------|
-| Address | `L2R.Buildtronix.Engineering.research.public…` | `v1:e1:apex:confidential:mem:…` 8-tuple |
-| Core unit | Context Envelope + handoff | Traversal + ProofPackage + GovernanceEpoch |
-| Orchestration | LangGraph agent chain | MeshResolver 13-step pipeline |
-| Phase naming | Phase B = primitive validation | Phase 1B = crypto signer authenticity |
-| Repo evidence | Marketing Next.js site in `tronixmesh` | Python package described; not present in this checkout |
-
-**Production requirement:** Phase B must name a **canonical substrate** and a **mapping layer** (or explicitly freeze v1.1-only for the pilot). Building both in parallel without a bridge is dual-implementation debt and will invalidate eval labels.
-
-### C3 — Component owners still TBD
-Every row in §3.1 is `[OWNER: TBD]`. Draft correctly calls this Critical. Kickoff remains blocked.
-
-### C4 — Authority model for public→confidential is underspecified
-Draft defers Decision Tokens to Phase C, but the selected boundary is **sensitivity-increasing** and architecture requires authority checks at boundaries. Without a Phase B **minimal authority grant** (static signed grant, HMAC channel permit, or frozen bootstrap grant), F7 and the boundary story are theater.
-
-### C5 — Latency targets contradict classifier design
-P1 demands classification p50 &lt; 100ms / p95 &lt; 300ms while Stage 3 is a **Haiku LLM call**. That will miss by 1–2 orders of magnitude. Either:
-
-- Stage 1–2 are rule-based hot path (p50/p95 apply only there), and LLM escalate is a separate metric, or  
-- P1 targets are rewritten for LLM classification.
-
-Leaving both as written makes the gate unmeetable by design.
-
-### C6 — “No new infra” contradicts stack
-Draft says run on existing Vultr and avoid new infra, then proposes Redis, Postgres hash chain, HashiCorp Vault / AWS KMS, Honeycomb. For production-grade: inventory what exists today, what is greenfield, and what is explicitly deferred (e.g. Vault → sealed env file with rotation runbook for pilot only).
+| Item | Why |
+|------|-----|
+| Inner-first handoff mission | v1.1 §6; RTP pressure |
+| Competitive intel 3-agent + one boundary | Real value, representative, repeatable |
+| Hard out-of-scope | Protects ship |
+| M/F/A primary; P secondary within 2× | Correct ordering |
+| Fail-closed + provenance survives failure | Doctrine + v1.1 §8.5 |
+| Eval set as contract | Measurability |
+| Clear accountability | Valid — **implementation lightened** for founder-scale |
 
 ---
 
-## High Gaps (Production Hardening Required)
+## Critical Defects (Original Draft)
 
-### H1 — Delivery semantics
-F5/F6 require no duplicate side effects but omit:
+### C1 — Schedule stale
+May 30, 2026 target vs validation date 2026-07-16 → rebaselined to T0+30.
 
-- Idempotency keys per step  
-- Exactly-once vs at-least-once policy  
-- Side-effect ledger (external writes, tool calls)  
-- Dedup window and poison-message quarantine  
+### C2 — Substrate dualism → **refined disposition**
+v1.1 envelope/grid vs v2.3 MeshResolver/ProofPackage remain distinct **behaviors**, but proof is **not** safely deferred if it is part of the data model.
 
-### H2 — Security / threat model absent
-For a confidential-boundary pilot, minimum required:
+**Wrong recommendation (earlier pass):** “defer ProofPackage entirely / v1.1-only.”  
+**Corrected recommendation:** **proof-native schema now, proof-enabled behavior later.**
 
-- Threat model (STRIDE or equivalent) scoped to Phase B  
-- Prompt-injection / data-exfil across public→confidential handoff  
-- Secret handling for model API keys  
-- Signing key lifecycle (even bootstrap)  
-- Soft-launch data handling: internal capability data must not leak to unauthorized soft-launch users  
+| Design now | Enable later |
+|------------|--------------|
+| Envelope schema | Proof verification |
+| Proof fields / refs | Mesh resolution hot path |
+| Signature blocks | Distributed enforcement |
+| Versioning | Cross-node consensus |
 
-### H3 — Observability is named, not operationalized
-Need: trace IDs across handoffs, red/black dashboards for F1–F8, alert routes, retention, PII scrubbing in logs.
+Narrow claim: if patentable differentiation depends on proof and governance, preserve those capabilities in schema/interfaces from the outset — without implementing every verification path in Phase B.
 
-### H4 — Soft launch without runbooks
-Need: operator runbook, incident severities, rollback (feature flag / kill switch), freeze procedure when provenance integrity fails, who is on-call for 2-week soft launch.
+### C3 — Ownership → **refined disposition**
+Unassigned owners remain a blocker. **Rejected:** four owners/component, architecture board, formal committees.  
+**Adopted:** Chris (architecture + ops), Robert (runtime), peer/council security review before release.
 
-### H5 — Eval set incomplete as a contract
-Need gold labels for: coordinate sequence, boundary events, required envelope fields, pass/fail rubric for “correct output,” ambiguity expected behavior, injected failure expected behavior. Chris personal review must be a dated sign-off artifact.
+### C4 — Authority at public→confidential underspecified
+Still requires Phase B minimal authority (bootstrap/static grant). Decision Tokens stay Phase C.
 
-### H6 — Integration / CI missing
-No definition of: unit vs contract vs chaos suites, CI gate for soft launch, schema migration policy, backup/restore drill for Postgres provenance.
+### C5 — Classifier latency vs Haiku
+Split P1a (rules) / P1b (LLM escalate).
 
-### H7 — Cost model mismatch
-v1.1 estimates ~$920–2,140/mo; draft suggests $5–10k for 20-day compute. Reconcile or explain (contractor vs compute vs one-time).
-
-### H8 — Repo / packaging unclear
-This repository is currently a Next.js marketing site. Phase B code location, language, package boundary, and deploy path are unspecified.
+### C6 — “No new infra” vs proposed stack
+Inventory Vultr first; document downgrades.
 
 ---
 
-## Medium Gaps
+## High Gaps — Disposition After Refinement
 
-| ID | Gap |
-|----|-----|
-| M1 | Classifier confidence threshold numeric value undefined |
-| M2 | `max_retries`, backoff, jitter, timeout budgets undefined |
-| M3 | Envelope schema versioning / forward compatibility undefined |
-| M4 | Channel rule grammar artifact location undefined |
-| M5 | Soft launch audience identity / access control undefined |
-| M6 | Naming collision: Phase B (pilot) vs Phase 1B (crypto doctrine) — must disambiguate in all docs |
-| M7 | Peer-review “PostgreSQL store pending” vs Phase B provenance Postgres — same store or parallel? |
-| M8 | Operator dashboard deferred but F3/F7 require “surfaced to operator” — need minimal operator surface (CLI OK) |
+| Gap | Disposition |
+|-----|-------------|
+| Idempotency / delivery semantics | Kept in plan §3.3 / F9 |
+| Security / threat model | Prefer doctrine map; add only Open rows (injection suite, ACL, secrets path) |
+| Observability | Open in traceability → short pilot note, not new doctrine |
+| Runbooks / kill switch | Kept; map halt semantics to doctrine where possible |
+| Eval contract | Kept |
+| CI / restore drill | Kept |
+| Cost reconcile | Gate 0.7 |
+| Repo / packaging | Folded into Gate 0.6 IP + private eng default for RTP |
+| **IP posture** | **Added** — disclosure vs non-provisional, trade secret, private repos |
+| **Capacity displacement** | **Added** — Robert/TronixMesh vs Pre-Con, Clover, AMS, FedTronix, Carl’s Wine Vault |
+| **Doctrine-first gates** | **Added** — traceability matrix before new S/O paperwork |
 
 ---
 
-## Alignment Checks
+## Process Corrections
 
-| Source claim | Phase B draft | Result |
-|--------------|---------------|--------|
-| v1.1 Phase B hypotheses H-ROUTE-1, H-MEM-2 | Covered | Pass |
-| v1.1 §8.2 handoff failures | F1–F8 cover + extend | Pass |
-| Doctrine fail-closed | Stated | Pass (needs enforcement tests) |
-| Doctrine Phase 1B crypto authenticity | Explicitly deferred | Acceptable only if labeled **not** crypto-certified |
-| Eng Guide MeshResolver as core | Not referenced | Fail / reconcile |
-| Patent / IP reduction-to-practice | Competitive intel is good RTP | Pass if provenance + boundary evidence captured |
+| Heavyweight advice | Founder-scale substitute |
+|--------------------|---------------------------|
+| Architecture board | Chris freezes schemas (Gate 0.1) |
+| Multi-owner RACI matrix | Single owner per subsystem |
+| Standing security committee | Peer/council review before release |
+| Long Q1–Q10 wall | Streamlined **Gate 0** (8 decisions) |
+| “Embedded enforcement proof is the product” | Preserve proof/governance capability in schema; phase enablement |
 
 ---
 
 ## Recommended Disposition
 
-1. Accept mission, workflow, and M/F/A gate structure.  
-2. Adopt updated plan v1.1 (production).  
-3. Answer **blocking questions** in the updated plan §0 before any build day is counted.  
-4. Do not market or soft-launch as “constitutional / cryptographically certified” until doctrine Phase 1B crypto items are in scope (later phase).
+1. Keep mission, workflow, M/F/A structure.  
+2. Execute against plan **v1.2** (proof-native, Gate 0, capacity, IP).  
+3. Close Gate 0 before counting build days.  
+4. Use [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) to avoid duplicate docs.  
+5. Do not market Phase B as Doctrine-1B crypto-certified.
 
 ---
 
