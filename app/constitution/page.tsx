@@ -91,7 +91,7 @@ export default function Constitution() {
         {/* Constitutional note */}
         <div className="mt-10 p-6 bg-gray-dark border border-gray-700 rounded-lg">
           <p className="text-gray-400 text-sm leading-relaxed">
-            <strong className="text-white">v1.2 change log:</strong> Mission supremacy eliminated (#5). Human override added explicitly (#6). Novelty bias removed (#3). Role-boundary language tightened (#10). Standing upgraded with recourse (#15). "External" → "independent" scrutiny (#16). Enforceability index added. Nine changes total, reviewed June 13, 2026.
+            <strong className="text-white">v1.2 change log:</strong> Mission supremacy eliminated (#5). Human override added explicitly (#6). Novelty bias removed (#3). Role-boundary language tightened (#10). Standing upgraded with recourse (#15). &quot;External&quot; → &quot;independent&quot; scrutiny (#16). Enforceability index added. Nine changes total, reviewed June 13, 2026.
           </p>
           <p className="text-gray-500 text-xs mt-3 font-mono">
             The most important edit: <em>The mission steers; the constraints bind.</em> — the constitutional core of TronixMesh.

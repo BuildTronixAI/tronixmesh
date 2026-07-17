@@ -16,6 +16,10 @@ TronixMesh is **not** simply an AI agent framework. It is a **governance runtime
 
 > **Agents reason. The runtime governs. Humans retain ultimate authority.**
 
+### Patented core (must not be omitted)
+
+**Coordinate-native governance with embedded enforcement proof** (US Provisional 64/072,487): fractal coordinates embed authority scope and isolation; enforcement is provable from coordinate + cryptographic lineage without trusting the model. Full treatment: Architecture Write-Up §2.
+
 Unlike LangGraph, AutoGen, CrewAI, or OpenAI Swarm, TronixMesh treats the LLM as **untrusted compute**. The LLM is never the source of authority.
 
 | The runtime owns | The model produces |
