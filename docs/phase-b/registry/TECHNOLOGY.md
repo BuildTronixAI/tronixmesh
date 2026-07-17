@@ -7,8 +7,9 @@ Status: **approved** (use in Phase B) · **experimental** (allowed behind flag /
 | Python 3.11+ | Approved | Runtime language |
 | LangGraph | Approved | Agent chain only · ADR-0002 |
 | PostgreSQL | Approved | Provenance + task state · ADR-0003 |
-| Ed25519 | Experimental→target | Preferred signatures · ADR-0004 |
-| HMAC-SHA256 | Experimental | Pilot downgrade only if ADR-0004 says so |
+| Envelope signature block (agnostic layout) | Approved | Frozen fields · ADR-0004 |
+| Ed25519 | Approved | Intended first `algorithm_id` · ADR-0004 |
+| HMAC-SHA256 | Experimental | Same opaque layout only; no schema fork · ADR-0004 |
 | Redis | Experimental | Only if already on Vultr · ADR-0005 |
 | Postgres JSONB cell memory | Approved | Default if Redis absent |
 | OpenTelemetry | Approved | Traces/metrics |

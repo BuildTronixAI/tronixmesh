@@ -24,5 +24,5 @@ Gate **0.9** requires ADRs for irreversible choices. Format is intentionally lig
 | [0001](./0001-proof-native-envelopes.md) | Proof-native envelopes | Accepted |
 | [0002](./0002-langgraph-orchestration.md) | LangGraph for agent orchestration | Accepted |
 | [0003](./0003-postgresql-provenance.md) | PostgreSQL for provenance + task state | Accepted |
-| [0004](./0004-envelope-signatures.md) | Ed25519 vs HMAC signatures | Proposed |
+| [0004](./0004-envelope-signatures.md) | Signature-agnostic envelope (schema freeze) | **Accepted** |
 | [0005](./0005-cell-memory-store.md) | Redis vs Postgres cell memory | Proposed |

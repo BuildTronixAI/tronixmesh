@@ -5,34 +5,61 @@
 **Tenant:** Buildtronix (single) · **Domain:** Engineering (single)  
 **Baseline architecture:** v1.1 Fractal Grid + **proof-native schema** (verification phased)  
 **Supersedes:** Phase B Inner-First Build Plan (Draft, May 2026 soft-launch target)  
-**Status:** Draft for Chris Gate 0 sign-off  
+**Plan state:** **Conditionally Ready** — architectural exit gates in progress; not Approved for Build  
 **Owners (default):** Architecture/Ops — Chris · Runtime — Robert · Security review — peer/council before release  
-**Updated:** 2026-07-16 (v1.3 refinements)  
+**Updated:** 2026-07-17 (v1.4 — final production feedback)  
 **Companions:** [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
+
+### Readiness states (no numerical scores)
+
+```
+Draft → Architecture Complete → Conditionally Ready → Production Ready → Approved for Build
+```
+
+| State | Meaning |
+|-------|---------|
+| Draft | Working text |
+| Architecture Complete | Schemas/ADRs/traceability closed |
+| Conditionally Ready | Architecture mostly closed; listed exit gates remain |
+| Production Ready | Exit gates closed; artifact authoritative on remote |
+| Approved for Build | Chris Gate 0 signed; build days may count |
+
+**Do not use numerical review scores.** Scores reward responsiveness and overstate readiness.
+
+### Exit gates from Conditionally Ready
+
+| # | Gate | Status |
+|---|------|--------|
+| E1 | Doctrine-to-gate traceability matrix complete | **Done** — [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) |
+| E2 | ADR-0004 schema-level decision (not “verify later”) | **Done** — Option B signature-agnostic envelope, Accepted |
+| E3 | GitHub sync: local commit == remote PR == reviewed artifact | **Open** — restore auth / push |
+| — | Gate 0.5 capacity + 0.6 IP fill-in | Open (operational; required for Approved for Build) |
 
 ---
 
 ## Gate 0 — Streamlined Sign-Off
 
-Kickoff is blocked until these decisions are written and approved. Founder-scale: high signal, no invented committees.
+Kickoff / **Approved for Build** requires these decisions written and approved. Founder-scale: high signal, no invented committees.
 
 | # | Gate | Decision required | Owner | Status |
 |---|------|-------------------|-------|--------|
-| G0.1 | **Architecture** | Core schemas and interfaces frozen (§1.2 proof-native envelope; address + handoff APIs) | Chris | _Open_ |
-| G0.2 | **Security** | Authn/authz, secrets, fail-closed behavior defined for Phase B scope | Chris (+ peer review before release) | _Open_ |
-| G0.3 | **Operations** | Rollback, monitoring, backups documented for pilot environment | Chris | _Open_ |
-| G0.4 | **Ownership** | Single accountable owner per major subsystem (§3.1) | Chris | _Open_ |
+| G0.1 | **Architecture** | Core schemas frozen (§1.2 + ADR-0001/0004 signature block) | Chris | Ready to accept |
+| G0.2 | **Security** | Authn/authz, secrets, fail-closed for Phase B | Chris (+ peer review before release) | _Open_ |
+| G0.3 | **Operations** | Rollback, monitoring, backups for pilot | Chris | _Open_ |
+| G0.4 | **Ownership** | Single owner per major subsystem (§3.1) | Chris | Defaults set; confirm |
 | G0.5 | **Capacity** | **Who builds this, and what stops while they do?** (§11) | Chris | _Open_ |
-| G0.6 | **IP** | Disclosure boundary approved with counsel as needed (§10) | Chris | _Open_ |
-| G0.7 | **Budget** | Infra + model spend limits approved | Chris | _Open_ |
-| G0.8 | **Execution** | Milestones, acceptance criteria, staged rollout defined (§3.4, §4, §9) | Chris | _Open_ |
-| G0.9 | **ADRs** | Irreversible architecture decisions recorded (§1.3, [`adr/`](./adr/)) | Chris | _Open_ |
+| G0.6 | **IP** | Disclosure boundary with counsel as needed (§10) | Chris | _Open_ |
+| G0.7 | **Budget** | Infra + model spend limits | Chris | _Open_ |
+| G0.8 | **Execution** | Milestones, acceptance criteria, staged rollout (§3.4, §4, §9) | Chris | Defined; confirm |
+| G0.9 | **ADRs** | Irreversible decisions in [`adr/`](./adr/) — **ADR status is sole lifecycle source** | Chris | 0001–0004 Accepted; 0005 Proposed |
 
-**Retained from original review (keep):** FP/FN classifier objectives · tech registry (approved/rejected/experimental) · staged rollout · Gate 0 as decision point.
+**Retained:** FP/FN classifier objectives · tech registry · staged rollout · Gate 0.
 
-**Remaining tactical questions** (latency split, retries, HMAC vs Ed25519 Day 1, CLI vs web ops, etc.) are answered by **T3**, not Gate 0 — see §13. Signature algorithm choice must land in an ADR by T3 even if Gate 0.9 covers the rest.
+**Rejected:** Separate Decision Log (duplicates ADR status; diverges). Auto-generate any dashboard from ADR front-matter only.
 
-Once Gate 0 is signed, Phase B is locked. Scope adds go to the Phase C queue.
+**Tactical (by T3, not schema blockers):** retries, CLI vs web ops, confidence threshold, Vultr inventory → ADR-0005. HMAC vs Ed25519 is **not** a schema open item — both fit ADR-0004 opaque layout; Ed25519 is intended first `algorithm_id`.
+
+Once Gate 0 is signed **and** E3 sync is green, Phase B is **Approved for Build**. Scope adds → Phase C queue.
 
 ---
 
@@ -98,7 +125,7 @@ Minimum ADRs before or at Gate 0 close:
 | ADR-0001 | Proof-native envelopes (schema vs behavior) |
 | ADR-0002 | LangGraph for agent orchestration |
 | ADR-0003 | PostgreSQL for provenance + task state |
-| ADR-0004 | Ed25519 vs HMAC for envelope signatures *(may finalize by T3)* |
+| ADR-0004 | **Accepted** — signature-agnostic envelope (Option B); Ed25519 intended first algorithm |
 | ADR-0005 | Redis vs Postgres for cell memory *(after Vultr inventory)* |
 
 ---
@@ -175,7 +202,7 @@ Gate 0.4 confirms or overrides this table. Do **not** require four owners per co
 |-------|--------|-------|
 | Language | Python 3.11+ | Aligns with reference Mesh package |
 | Orchestration | LangGraph | Agent chain only — not a substitute for channel/provenance · ADR-0002 |
-| Envelope | JSON + signature block (Ed25519 preferred) | Proof-native fields; verify feature-flagged · ADR-0001/0004 |
+| Envelope | JSON + **signature-agnostic** block | Frozen fields per ADR-0004; verify feature-flagged · ADR-0001/0004 |
 | Provenance / task state | PostgreSQL | Append-only ledger · ADR-0003 |
 | Cell memory | Redis **or** Postgres JSONB | Match Vultr inventory · ADR-0005 |
 | Classifier | Rules (hot path) + Haiku escalate | FP/FN objectives; separate latency metrics |
@@ -484,7 +511,7 @@ Gate 0 replaces the old Q1–Q10 blocking wall. These remain for early execution
 5. Soft-launch audience names + real vs synthetic confidential data?  
 6. Classifier confidence threshold?  
 7. `max_retries` / timeout / lease budgets?  
-8. HMAC acceptable Day 1 or Ed25519 mandatory?  
+8. ~~HMAC vs Ed25519 schema~~ → **closed** by ADR-0004 (opaque layout; Ed25519 intended first).  
 9. Operator surface: CLI-only or minimal web page?  
 10. Relationship to Design^BOB / Competitive Intel — wrap, rewrite, or strangler?  
 11. Address canonicalization: keep v1.1 dotted form only, or dual-encode v2.3 8-tuple as alias in schema now?  
@@ -496,8 +523,7 @@ Gate 0 replaces the old Q1–Q10 blocking wall. These remain for early execution
 | Version | Date | Notes |
 |---------|------|-------|
 | Draft | ~May 2026 | Original Phase B plan (May 30 target) |
-| v1.1-PRODUCTION | 2026-07-16 | First production hardening pass |
-| v1.2-PRODUCTION | 2026-07-16 | Proof-native schema; founder-scale ownership; IP; doctrine-first; capacity; Gate 0 |
-| v1.3-PRODUCTION | 2026-07-16 | Proof→schema dependency; feature flags; capacity-as-scheduling; counsel-safe IP; FP/FN; tech registry; staged rollout; ADR Gate 0.9 |
+| v1.1–v1.3 | 2026-07-16 | Production hardening sequence |
+| v1.4-PRODUCTION | 2026-07-17 | Conditionally Ready; E1 matrix; ADR-0004 Option B Accepted; no scores; reject Decision Log; E3 sync pending |
 
-*End of Phase B Inner-First Build Plan (Production v1.3).*
+*End of Phase B Inner-First Build Plan (Production v1.4).*
