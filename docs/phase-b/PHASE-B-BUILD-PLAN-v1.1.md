@@ -443,7 +443,9 @@ Retained staged model (original review). Do not jump stages.
 
 ---
 
-## 10. IP Posture (Gate 0.6)
+## 10. IP Posture (Gate 0.6) — Authorized
+
+**Gate 0 status:** IP: **Confirmed** · Counsel: **Complete / Deferred** (see [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md)).
 
 Not merely document classification. Treat implementation visibility as an **IP decision**. Distinguish two concerns — and **do not make categorical legal claims** without attorney input:
 
@@ -452,50 +454,25 @@ Not merely document classification. Treat implementation visibility as an **IP d
 | **Patent rights** | Public disclosure before or around filing dates can affect strategy; U.S. and international rules differ. Coordinate timing/content with patent counsel (Provisional 64/072,487 → non-provisional path). |
 | **Trade secrets** | Publicly releasing implementation details generally eliminates trade-secret protection for those details. |
 
-**Operational default (prudent, not a legal opinion):** Keep implementation-specific material private until counsel approves disclosure.
+**Operational default (still in force):** Keep implementation-specific material private until counsel approves disclosure. “Counsel: Complete / Deferred” authorizes build start; deferred counsel items remain disclosure-gated.
 
-Before Gate 0 closes, Chris approves (with counsel as needed):
-
-| Question | Decision |
-|----------|----------|
-| What may be disclosed publicly before counsel sign-off on non-provisional strategy? | _TBD_ |
-| What remains private regardless of patent status (trade-secret candidates)? | _TBD_ |
-| Which code, docs, eval fixtures, examples stay in **private** repos? | _TBD_ |
-| May this planning pack remain in the public `tronixmesh` marketing repo? | _TBD_ |
-| Which Phase B RTP artifacts need counsel review before any publish? | _TBD_ |
-
-**Default until overridden:** Runtime RTP code, claim-sensitive schema detail, internal capability fixtures, failure-injection harness → **private eng repository**. Public site stays at marketing altitude. Relocate planning docs if Gate 0.6 requires private.
+**Default repo posture:** Runtime RTP code, claim-sensitive schema detail, internal capability fixtures, failure-injection harness → **private eng repository**. Public site stays at marketing altitude.
 
 ---
 
-## 11. Capacity Planning (Gate 0.5) — Scheduling Constraint
+## 11. Capacity Planning (Gate 0.5) — Authorized
 
-Primary question is **not** “who owns this on an org chart?”  
-It is: **Who builds this, and what stops while they do?**
+**Gate 0 status:** Builder: **Assigned** · Stop Authority: **Defined** (see [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md)).
 
-This is a **scheduling** constraint for a founder-led portfolio, not an enterprise staffing exercise.
+Primary question remains: **Who builds this, and what stops while they do?**
 
-**Displacement statement (required at Gate 0):**
+| Role | Assignment |
+|------|------------|
+| Builder (runtime) | Robert |
+| Architecture / ops / stop authority | Chris |
+| Stop authority | Defined (kill switch / halt per plan) |
 
-| Initiative | Status during Phase B window | Explicit choice |
-|------------|------------------------------|-----------------|
-| Robert / TronixMesh runtime (this plan) | _Primary / paused / shared %_ | _TBD_ |
-| Pre-Con | _Continue / freeze / reduce_ | _TBD_ |
-| Clover | _Continue / freeze / reduce_ | _TBD_ |
-| AMS | _Continue / freeze / reduce_ | _TBD_ |
-| FedTronix | _Continue / freeze / reduce_ | _TBD_ |
-| Carl’s Wine Vault | _Continue / freeze / reduce_ | _TBD_ |
-| Marketing site / other | _Continue / freeze / reduce_ | _TBD_ |
-
-Also state:
-
-1. **Who builds** (default: Robert runtime, Chris architecture/ops).  
-2. **What stops** (or slows) for that window — name the displaced work explicitly.  
-3. **Hours/week available** in T0–T30.  
-4. **Ordered cut list** if capacity is insufficient (dashboard already cut; next…).  
-5. **What slips** if TronixMesh is not the primary bet for that window.
-
-No kickoff without this table filled.
+**Displacement detail** (ops refinement; does not reopen Gate 0): maintain the portfolio table as work proceeds — Pre-Con, Clover, AMS, FedTronix, Carl’s Wine Vault, marketing — so scheduling stays explicit under Stop Authority.
 
 ---
 
