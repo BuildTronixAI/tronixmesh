@@ -1,63 +1,66 @@
 # Phase B Plan — Validation Report
 
-**Plan version:** Production **v1.4**  
-**Plan state:** **Production Ready**  
+**Plan version:** Production **v1.4.1**  
+**Plan status:** **Validated and Conditionally Approved for Build**  
+**Execution:** **Blocked** (Gates 0.5, 0.6, Gate 0 unsigned)  
 **Date:** 2026-07-17  
 **Artifacts:** [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
 
 ---
 
+## Verdict (unambiguous)
+
+This is a **conditional approval**, not an unconditional production / execution approval.
+
+| Stage | Status |
+|-------|--------|
+| Architecture | Approved |
+| Production plan | Validated |
+| Build authorization | Conditionally approved — after Gates 0.5 & 0.6 and Gate 0 signature |
+| Countdown to implementation (T0) | Not started |
+| Production deployment | Not yet |
+
+**GO for implementation planning. Not GO for execution** until Gate 0 is formally signed.
+
+Do **not** read “plan validated” or prior “Production Ready” wording as “Approved for Build.” Those are different states.
+
+---
+
 ## Scoring policy
 
-**Numerical scores are discontinued.** Prior 9.x ratings overstated readiness relative to open architectural gates and rewarded feedback responsiveness over production completeness.
-
-Use states only:
-
-`Draft → Architecture Complete → Conditionally Ready → Production Ready → Approved for Build`
+**Numerical scores are discontinued** in this artifact set. Qualitative review commentary may use scores informally; plan state does not.
 
 ---
 
-## Final production feedback — disposition
+## What was validated (closed)
 
-| Item | Disposition |
-|------|-------------|
-| Score/verdict inconsistency | Fixed — states only |
-| ADR-0004 as schema decision | **Accepted Option B** — signature-agnostic envelope; verify flagged |
-| Traceability as Gate 1 | **Done** — Requirement/Source/Section/Status/Gap matrix |
-| Separate Decision Log | **Rejected** — ADR status is sole lifecycle source |
-| GitHub sync fail-closed | **Done (E3)** — branch synced to origin |
-| Keep FP/FN, tech registry, staged rollout, Gate 0 | Retained in plan |
-
----
-
-## Exit gates (Conditionally Ready → Production Ready)
-
-| # | Gate | Status |
-|---|------|--------|
-| E1 | Doctrine-to-gate matrix | **Done** |
-| E2 | ADR-0004 schema-level decision | **Done** (Option B) |
-| E3 | Local == remote PR == reviewed artifact | **Done** |
-
-Operational for **Approved for Build:** Gate 0.5 capacity, 0.6 IP (counsel as needed), remaining Gate 0 checkboxes.
+| Item | Status |
+|------|--------|
+| E1 — Doctrine-to-gate matrix | Done |
+| E2 — ADR-0004 Option B (signature-agnostic; verify feature-flagged) | Done |
+| E3 — GitHub sync (local == remote) | Done |
+| Readiness scores → discrete states | Done |
+| Decision Log rejected (ADR status sole source) | Done |
 
 ---
 
-## What v1.3/v1.4 resolved
+## What is still required (execution blockers)
 
-- Proof as architectural dependency; enforcement feature-flagged  
-- Capacity as scheduling (*who builds, what stops*)  
-- Counsel-safe IP posture (patent vs trade secret; no categorical legal claims)  
-- Founder-scale ownership  
-- Signature schema frozen without “verify later” ambiguity  
-- Authoritative remote artifact restored  
+| Item | Status |
+|------|--------|
+| Gate 0.5 — who builds, what stops | **Open** |
+| Gate 0.6 — IP / counsel | **Open** |
+| Gate 0 — formal sign-off | **Open** |
+
+After those are complete: status → **Approved for Build**; **then** T0 may count.
 
 ---
 
-## Next step
+## Overall assessment
 
-1. Chris fills Gate **0.5** (capacity) and **0.6** (IP).  
-2. Chris signs Gate 0.  
-3. State → **Approved for Build**; T0 may count.
+- Architecture and governance process for the **plan** are in good shape.  
+- Readiness to **plan** implementation is high.  
+- Readiness to **execute** is blocked on Gate 0.5 / 0.6 / Gate 0.
 
 ---
 

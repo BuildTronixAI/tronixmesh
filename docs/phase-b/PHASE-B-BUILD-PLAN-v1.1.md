@@ -5,15 +5,30 @@
 **Tenant:** Buildtronix (single) · **Domain:** Engineering (single)  
 **Baseline architecture:** v1.1 Fractal Grid + **proof-native schema** (verification phased)  
 **Supersedes:** Phase B Inner-First Build Plan (Draft, May 2026 soft-launch target)  
-**Plan state:** **Production Ready** — E1–E3 exit gates closed; not yet Approved for Build (Gate 0.5/0.6)  
+**Plan status:** **Validated and Conditionally Approved for Build**  
+**Execution:** **Blocked** until Gates **0.5**, **0.6**, and full **Gate 0** sign-off  
+**T0 / implementation countdown:** **Not started**  
 **Owners (default):** Architecture/Ops — Chris · Runtime — Robert · Security review — peer/council before release  
-**Updated:** 2026-07-17 (v1.4 — final production feedback)  
+**Updated:** 2026-07-17 (v1.4.1 — status clarity)  
 **Companions:** [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
+
+### Status board (authoritative)
+
+| Stage | Status |
+|-------|--------|
+| Architecture | **Approved** (E1–E2 closed; ADRs 0001–0004 Accepted) |
+| Production plan | **Validated** (E1–E3 closed; authoritative on remote) |
+| Build authorization | **Conditionally approved** — pending Gates 0.5, 0.6, and Gate 0 signature |
+| Countdown to implementation (T0) | **Not started** |
+| Production / soft-launch deployment | **Not yet** |
+
+**GO for implementation planning. Not a GO for execution** until Gate 0 is formally signed.
 
 ### Readiness states (no numerical scores)
 
 ```
-Draft → Architecture Complete → Conditionally Ready → Production Ready → Approved for Build
+Draft → Architecture Complete → Conditionally Ready → Plan Validated
+    → Conditionally Approved for Build → Approved for Build (execution authorized)
 ```
 
 | State | Meaning |
@@ -21,25 +36,33 @@ Draft → Architecture Complete → Conditionally Ready → Production Ready →
 | Draft | Working text |
 | Architecture Complete | Schemas/ADRs/traceability closed |
 | Conditionally Ready | Architecture mostly closed; listed exit gates remain |
-| Production Ready | Exit gates closed; artifact authoritative on remote |
-| Approved for Build | Chris Gate 0 signed; build days may count |
+| Plan Validated | E1–E3 closed; artifact authoritative on remote |
+| Conditionally Approved for Build | **Current** — plan validated; execution still blocked on Gate 0 |
+| Approved for Build | Chris signs Gate 0 (incl. 0.5 & 0.6); **then** T0 may count |
 
-**Do not use numerical review scores.** Scores reward responsiveness and overstate readiness.
+**Do not use numerical review scores.** Do not equate “plan validated” with “execution authorized.”
 
-### Exit gates from Conditionally Ready
+### Architectural exit gates (closed)
 
 | # | Gate | Status |
 |---|------|--------|
 | E1 | Doctrine-to-gate traceability matrix complete | **Done** — [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) |
 | E2 | ADR-0004 schema-level decision (not “verify later”) | **Done** — Option B signature-agnostic envelope, Accepted |
-| E3 | GitHub sync: local commit == remote PR == reviewed artifact | **Done** — `700a48c` (and successors) on `origin/cursor/phase-b-production-plan-1df7` |
-| — | Gate 0.5 capacity + 0.6 IP fill-in | Open (operational; required for **Approved for Build**) |
+| E3 | GitHub sync: local commit == remote PR == reviewed artifact | **Done** — branch synced to origin |
+
+### Execution blockers (still open)
+
+| # | Gate | Status |
+|---|------|--------|
+| G0.5 | Capacity — who builds, what stops | **Open** |
+| G0.6 | IP / counsel disclosure boundary | **Open** |
+| G0 | Formal sign-off of full Gate 0 checklist | **Open** |
 
 ---
 
 ## Gate 0 — Streamlined Sign-Off
 
-Kickoff / **Approved for Build** requires these decisions written and approved. Founder-scale: high signal, no invented committees.
+**Approved for Build / execution authorization** requires these decisions written and approved. Founder-scale: high signal, no invented committees.
 
 | # | Gate | Decision required | Owner | Status |
 |---|------|-------------------|-------|--------|
@@ -59,7 +82,7 @@ Kickoff / **Approved for Build** requires these decisions written and approved. 
 
 **Tactical (by T3, not schema blockers):** retries, CLI vs web ops, confidence threshold, Vultr inventory → ADR-0005. HMAC vs Ed25519 is **not** a schema open item — both fit ADR-0004 opaque layout; Ed25519 is intended first `algorithm_id`.
 
-Once Gate 0 is signed **and** E3 sync is green, Phase B is **Approved for Build**. Scope adds → Phase C queue.
+Once Gate 0 is signed (including **0.5** and **0.6**) **and** E3 sync remains green, status advances to **Approved for Build** and T0 may count. Until then, treat this pack as planning authority only — **not** execution authority. Scope adds → Phase C queue.
 
 ---
 
@@ -524,6 +547,7 @@ Gate 0 replaces the old Q1–Q10 blocking wall. These remain for early execution
 |---------|------|-------|
 | Draft | ~May 2026 | Original Phase B plan (May 30 target) |
 | v1.1–v1.3 | 2026-07-16 | Production hardening sequence |
-| v1.4-PRODUCTION | 2026-07-17 | E1 matrix; ADR-0004 Option B; no scores; reject Decision Log; E3 sync restored → **Production Ready** |
+| v1.4-PRODUCTION | 2026-07-17 | E1–E3 closed; ADR-0004 Option B |
+| v1.4.1 | 2026-07-17 | Status clarified: Validated + Conditionally Approved for Build; execution blocked on Gate 0.5/0.6/0 |
 
 *End of Phase B Inner-First Build Plan (Production v1.4).*

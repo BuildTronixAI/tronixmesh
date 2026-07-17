@@ -1,25 +1,37 @@
-# Phase B — Pilot Planning Pack (v1.4)
+# Phase B — Pilot Planning Pack (v1.4.1)
 
-**Plan state: Production Ready** (not yet Approved for Build)
+**Status: Validated and Conditionally Approved for Build**  
+**Execution: Blocked** until Gates **0.5**, **0.6**, and Gate **0** are complete and signed.  
+**T0: Not started.**
+
+| Stage | Status |
+|-------|--------|
+| Architecture | Approved |
+| Production plan | Validated |
+| Build authorization | Conditional (pending Gate 0.5 / 0.6 / Gate 0) |
+| Implementation countdown | Not started |
+| Production deployment | Not yet |
+
+**GO for implementation planning. Not GO for execution.**
 
 | Doc | Purpose |
 |-----|---------|
-| [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) | Production plan v1.4 |
-| [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) | Gate E1 — doctrine-to-gate matrix |
-| [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) | Critique disposition (no numerical scores) |
-| [`adr/`](./adr/) | ADRs (sole decision lifecycle) — **0004 Accepted** |
-| [`registry/TECHNOLOGY.md`](./registry/TECHNOLOGY.md) | Approved / rejected / experimental |
+| [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) | Production plan |
+| [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) | E1 matrix |
+| [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) | Disposition (no numerical scores) |
+| [`adr/`](./adr/) | ADRs — sole decision lifecycle |
+| [`registry/TECHNOLOGY.md`](./registry/TECHNOLOGY.md) | Tech registry |
 
-### Exit gates (Conditionally Ready → Production Ready)
+### Closed (architecture / plan validation)
 
-1. Traceability matrix — **Done**  
-2. ADR-0004 schema decision — **Done** (signature-agnostic Option B)  
-3. GitHub sync — **Done** (`local == remote PR`)
+1. E1 Traceability matrix  
+2. E2 ADR-0004 Option B  
+3. E3 GitHub sync  
 
-### Remaining for Approved for Build
+### Open (execution authorization)
 
-- Gate **0.5** capacity (*who builds, what stops*)  
-- Gate **0.6** IP (counsel as needed)  
-- Chris signs Gate 0  
+- Gate **0.5** — who builds, what stops  
+- Gate **0.6** — IP / counsel  
+- Gate **0** — formal signature  
 
 No separate Decision Log. No numerical review scores.
