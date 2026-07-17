@@ -29,7 +29,8 @@
 |-------|-------|
 | Signed | Christopher C. Leiser |
 | Title | Chairman |
-| Date | ____________ *(blank on submitted instrument; recorded in-repo 2026-07-17)* |
+| Date | **2026-07-17** |
+| Confirmation | Affirmed in Cursor: “Proceed, this is my signature” (2026-07-17) |
 
 ---
 

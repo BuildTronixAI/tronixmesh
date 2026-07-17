@@ -20,7 +20,7 @@
 | Production plan | **Validated** |
 | Implementation governance | **Active** |
 | Build authorization (coding) | **Approved** — Gate 0 signed |
-| Countdown to implementation (T0) | **May start** |
+| Countdown to implementation (T0) | **Started 2026-07-17** — see [`T0-STATUS.md`](./T0-STATUS.md) |
 | Production / soft-launch deployment | **Not yet** (staged rollout R1→R3 still applies) |
 
 **Authorized now:** Phase B runtime implementation under this plan, schemas, and ADRs.  
