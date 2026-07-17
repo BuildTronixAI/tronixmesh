@@ -4,6 +4,14 @@
 **Authorization:** Gate 0 signed — Christopher C. Leiser, Chairman  
 **Plan status:** Approved for Build
 
+## Doctrine alignment
+
+North star: [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md)  
+Phase B slice: [`../architecture/PHASE-B-SLICE.md`](../architecture/PHASE-B-SLICE.md)
+
+**In force now:** fail-closed · runtime owns handoff authority · LLM untrusted · proof-native schema · hash-chain audit.  
+**Deferred:** Decision Tokens · full governance engine · BOB/Robert/Council personas (Phase C+).
+
 ## Delivered this increment
 
 | Item | Location | Tests |
@@ -17,10 +25,11 @@
 | Minimal authority (bootstrap grants) | `python/tronixmesh/authority.py` | pass |
 | Handoff primitive | `python/tronixmesh/handoff.py` | pass |
 | Feature flags | `python/tronixmesh/flags.py` | — |
+| Governance state types (fail-closed transitions) | `python/tronixmesh/governance.py` | pass |
 
 ```bash
 cd python && pip install -e ".[dev]" && pytest
-# 12 passed
+# 15 passed
 ```
 
 ## Next (T0–T3 / T4–T8)

@@ -22,3 +22,7 @@
 | [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) | Disposition |
 | [`adr/`](./adr/) | ADRs |
 | [`registry/TECHNOLOGY.md`](./registry/TECHNOLOGY.md) | Tech registry |
+| [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md) | North-star doctrine |
+| [`../architecture/PHASE-B-SLICE.md`](../architecture/PHASE-B-SLICE.md) | Doctrine → Phase B mapping |
+
+> Agents reason. The runtime governs. Humans retain ultimate authority.
