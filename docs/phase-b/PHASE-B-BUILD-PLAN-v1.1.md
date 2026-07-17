@@ -5,7 +5,7 @@
 **Tenant:** Buildtronix (single) · **Domain:** Engineering (single)  
 **Baseline architecture:** v1.1 Fractal Grid + **proof-native schema** (verification phased)  
 **Supersedes:** Phase B Inner-First Build Plan (Draft, May 2026 soft-launch target)  
-**Plan state:** **Conditionally Ready** — architectural exit gates in progress; not Approved for Build  
+**Plan state:** **Production Ready** — E1–E3 exit gates closed; not yet Approved for Build (Gate 0.5/0.6)  
 **Owners (default):** Architecture/Ops — Chris · Runtime — Robert · Security review — peer/council before release  
 **Updated:** 2026-07-17 (v1.4 — final production feedback)  
 **Companions:** [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
@@ -32,8 +32,8 @@ Draft → Architecture Complete → Conditionally Ready → Production Ready →
 |---|------|--------|
 | E1 | Doctrine-to-gate traceability matrix complete | **Done** — [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) |
 | E2 | ADR-0004 schema-level decision (not “verify later”) | **Done** — Option B signature-agnostic envelope, Accepted |
-| E3 | GitHub sync: local commit == remote PR == reviewed artifact | **Open** — restore auth / push |
-| — | Gate 0.5 capacity + 0.6 IP fill-in | Open (operational; required for Approved for Build) |
+| E3 | GitHub sync: local commit == remote PR == reviewed artifact | **Done** — `700a48c` (and successors) on `origin/cursor/phase-b-production-plan-1df7` |
+| — | Gate 0.5 capacity + 0.6 IP fill-in | Open (operational; required for **Approved for Build**) |
 
 ---
 
@@ -524,6 +524,6 @@ Gate 0 replaces the old Q1–Q10 blocking wall. These remain for early execution
 |---------|------|-------|
 | Draft | ~May 2026 | Original Phase B plan (May 30 target) |
 | v1.1–v1.3 | 2026-07-16 | Production hardening sequence |
-| v1.4-PRODUCTION | 2026-07-17 | Conditionally Ready; E1 matrix; ADR-0004 Option B Accepted; no scores; reject Decision Log; E3 sync pending |
+| v1.4-PRODUCTION | 2026-07-17 | E1 matrix; ADR-0004 Option B; no scores; reject Decision Log; E3 sync restored → **Production Ready** |
 
 *End of Phase B Inner-First Build Plan (Production v1.4).*

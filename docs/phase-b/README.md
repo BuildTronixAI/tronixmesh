@@ -1,6 +1,6 @@
 # Phase B — Pilot Planning Pack (v1.4)
 
-**Plan state: Conditionally Ready**
+**Plan state: Production Ready** (not yet Approved for Build)
 
 | Doc | Purpose |
 |-----|---------|
@@ -10,10 +10,16 @@
 | [`adr/`](./adr/) | ADRs (sole decision lifecycle) — **0004 Accepted** |
 | [`registry/TECHNOLOGY.md`](./registry/TECHNOLOGY.md) | Approved / rejected / experimental |
 
-### Exit gates
+### Exit gates (Conditionally Ready → Production Ready)
 
-1. ~~Traceability matrix~~ **Done**  
-2. ~~ADR-0004 schema decision~~ **Done** (signature-agnostic Option B)  
-3. **GitHub sync** — local == remote PR == reviewed artifact (**Open**)
+1. Traceability matrix — **Done**  
+2. ADR-0004 schema decision — **Done** (signature-agnostic Option B)  
+3. GitHub sync — **Done** (`local == remote PR`)
+
+### Remaining for Approved for Build
+
+- Gate **0.5** capacity (*who builds, what stops*)  
+- Gate **0.6** IP (counsel as needed)  
+- Chris signs Gate 0  
 
 No separate Decision Log. No numerical review scores.

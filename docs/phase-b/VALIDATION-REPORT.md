@@ -1,7 +1,7 @@
 # Phase B Plan — Validation Report
 
 **Plan version:** Production **v1.4**  
-**Plan state:** **Conditionally Ready**  
+**Plan state:** **Production Ready**  
 **Date:** 2026-07-17  
 **Artifacts:** [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
 
@@ -25,7 +25,7 @@ Use states only:
 | ADR-0004 as schema decision | **Accepted Option B** — signature-agnostic envelope; verify flagged |
 | Traceability as Gate 1 | **Done** — Requirement/Source/Section/Status/Gap matrix |
 | Separate Decision Log | **Rejected** — ADR status is sole lifecycle source |
-| GitHub sync fail-closed | **Open (E3)** — must restore before approval |
+| GitHub sync fail-closed | **Done (E3)** — branch synced to origin |
 | Keep FP/FN, tech registry, staged rollout, Gate 0 | Retained in plan |
 
 ---
@@ -36,7 +36,7 @@ Use states only:
 |---|------|--------|
 | E1 | Doctrine-to-gate matrix | **Done** |
 | E2 | ADR-0004 schema-level decision | **Done** (Option B) |
-| E3 | Local == remote PR == reviewed artifact | **Open** |
+| E3 | Local == remote PR == reviewed artifact | **Done** |
 
 Operational for **Approved for Build:** Gate 0.5 capacity, 0.6 IP (counsel as needed), remaining Gate 0 checkboxes.
 
@@ -49,13 +49,14 @@ Operational for **Approved for Build:** Gate 0.5 capacity, 0.6 IP (counsel as ne
 - Counsel-safe IP posture (patent vs trade secret; no categorical legal claims)  
 - Founder-scale ownership  
 - Signature schema frozen without “verify later” ambiguity  
+- Authoritative remote artifact restored  
 
 ---
 
-## Next step after E3
+## Next step
 
-1. Push authoritative commit; confirm PR matches.  
-2. Chris fills Gate 0.5 / 0.6 and signs Gate 0.  
+1. Chris fills Gate **0.5** (capacity) and **0.6** (IP).  
+2. Chris signs Gate 0.  
 3. State → **Approved for Build**; T0 may count.
 
 ---
