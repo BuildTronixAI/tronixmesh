@@ -48,3 +48,9 @@ __pycache__/
 .venv/
 venv/
 python/*.egg-info/
+
+# Next.js app (Vercel rootDirectory)
+/tronixmesh/node_modules
+/tronixmesh/.next
+/tronixmesh/out
+/tronixmesh/.vercel
