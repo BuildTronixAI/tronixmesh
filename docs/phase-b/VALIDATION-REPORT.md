@@ -1,71 +1,37 @@
 # Phase B Plan — Validation Report
 
-**Plan version:** Production **v1.4.2**  
-**Plan status:** **Validated and Conditionally Approved for Build**  
-**Implementation governance:** **Entered**  
-**Coding / T0:** **Blocked** until Gate 0 (incl. 0.5 & 0.6) is signed  
-**Date:** 2026-07-17  
-**Artifacts:** [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
+**Plan version:** Production **v1.5**  
+**Plan status:** **Approved for Build**  
+**Gate 0:** [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md)  
+**Signed:** Christopher C. Leiser, Chairman  
+**Date recorded:** 2026-07-17  
+**Artifacts:** plan · authorization · traceability · `adr/` · `registry/`
 
 ---
 
-## Verdict (unambiguous)
+## Verdict
 
-**Ready to enter implementation governance.** Remaining Gate 0 work is the explicit authorization control **before coding begins**.
-
-This is a **conditional approval**, not unconditional execution approval.
+Gate 0 executive authorization received. Phase B is **Approved for Build**. Coding and T0 are authorized. Soft-launch / production deployment remain gated by staged rollout (§9).
 
 | Stage | Status |
 |-------|--------|
 | Architecture | Approved |
 | Production plan | Validated |
-| Implementation governance | Entered |
-| Coding authorization | Blocked on Gate 0.5, 0.6, and Gate 0 signature |
-| Countdown to implementation (T0) | Not started |
-| Production deployment | Not yet |
-
-**Allowed:** Gate 0 fill-in, capacity/IP decisions, ADR-0005, infra inventory, eval v0 drafting.  
-**Not allowed:** Counting T0 or writing Phase B runtime code until Gate 0 is signed.
-
-Do **not** read “plan validated” as “coding authorized.”
+| Gate 0 authorization | **Complete** |
+| Coding / T0 | **Authorized** |
+| Soft-launch / production deploy | Not yet |
 
 ---
 
-## Scoring policy
+## Authorization as signed
 
-**Numerical scores are discontinued** in this artifact set. Qualitative review commentary may use scores informally; plan state does not.
-
----
-
-## What was validated (closed)
-
-| Item | Status |
-|------|--------|
-| E1 — Doctrine-to-gate matrix | Done |
-| E2 — ADR-0004 Option B (signature-agnostic; verify feature-flagged) | Done |
-| E3 — GitHub sync (local == remote) | Done |
-| Readiness scores → discrete states | Done |
-| Decision Log rejected (ADR status sole source) | Done |
+Architecture: Approved · ADRs: Accepted · Governance: Verified · Builder: Assigned · Stop Authority: Defined · Rollback: Defined · IP: Confirmed · Counsel: Complete / Deferred · Executive Approval: Approved to begin implementation.
 
 ---
 
-## What is still required (execution blockers)
+## Prior exit gates (still closed)
 
-| Item | Status |
-|------|--------|
-| Gate 0.5 — who builds, what stops | **Open** |
-| Gate 0.6 — IP / counsel | **Open** |
-| Gate 0 — formal sign-off | **Open** |
-
-After those are complete: status → **Approved for Build**; **then** T0 may count.
-
----
-
-## Overall assessment
-
-- Architecture and governance process for the **plan** are in good shape.  
-- Readiness to **plan** implementation is high.  
-- Readiness to **execute** is blocked on Gate 0.5 / 0.6 / Gate 0.
+E1 matrix · E2 ADR-0004 Option B · E3 GitHub sync · scores discontinued · Decision Log rejected.
 
 ---
 
