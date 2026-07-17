@@ -1,8 +1,9 @@
 # Phase B Plan — Validation Report
 
-**Plan version:** Production **v1.4.1**  
+**Plan version:** Production **v1.4.2**  
 **Plan status:** **Validated and Conditionally Approved for Build**  
-**Execution:** **Blocked** (Gates 0.5, 0.6, Gate 0 unsigned)  
+**Implementation governance:** **Entered**  
+**Coding / T0:** **Blocked** until Gate 0 (incl. 0.5 & 0.6) is signed  
 **Date:** 2026-07-17  
 **Artifacts:** [`PHASE-B-BUILD-PLAN-v1.1.md`](./PHASE-B-BUILD-PLAN-v1.1.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
 
@@ -10,19 +11,23 @@
 
 ## Verdict (unambiguous)
 
-This is a **conditional approval**, not an unconditional production / execution approval.
+**Ready to enter implementation governance.** Remaining Gate 0 work is the explicit authorization control **before coding begins**.
+
+This is a **conditional approval**, not unconditional execution approval.
 
 | Stage | Status |
 |-------|--------|
 | Architecture | Approved |
 | Production plan | Validated |
-| Build authorization | Conditionally approved — after Gates 0.5 & 0.6 and Gate 0 signature |
+| Implementation governance | Entered |
+| Coding authorization | Blocked on Gate 0.5, 0.6, and Gate 0 signature |
 | Countdown to implementation (T0) | Not started |
 | Production deployment | Not yet |
 
-**GO for implementation planning. Not GO for execution** until Gate 0 is formally signed.
+**Allowed:** Gate 0 fill-in, capacity/IP decisions, ADR-0005, infra inventory, eval v0 drafting.  
+**Not allowed:** Counting T0 or writing Phase B runtime code until Gate 0 is signed.
 
-Do **not** read “plan validated” or prior “Production Ready” wording as “Approved for Build.” Those are different states.
+Do **not** read “plan validated” as “coding authorized.”
 
 ---
 

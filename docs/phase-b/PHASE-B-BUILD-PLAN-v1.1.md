@@ -6,10 +6,10 @@
 **Baseline architecture:** v1.1 Fractal Grid + **proof-native schema** (verification phased)  
 **Supersedes:** Phase B Inner-First Build Plan (Draft, May 2026 soft-launch target)  
 **Plan status:** **Validated and Conditionally Approved for Build**  
-**Execution:** **Blocked** until Gates **0.5**, **0.6**, and full **Gate 0** sign-off  
-**T0 / implementation countdown:** **Not started**  
+**Governance:** **Ready to enter implementation governance**  
+**Coding / T0:** **Blocked** — Gate 0 is the explicit authorization control before coding begins  
 **Owners (default):** Architecture/Ops — Chris · Runtime — Robert · Security review — peer/council before release  
-**Updated:** 2026-07-17 (v1.4.1 — status clarity)  
+**Updated:** 2026-07-17 (v1.4.2 — implementation governance framing)  
 **Companions:** [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
 
 ### Status board (authoritative)
@@ -18,11 +18,13 @@
 |-------|--------|
 | Architecture | **Approved** (E1–E2 closed; ADRs 0001–0004 Accepted) |
 | Production plan | **Validated** (E1–E3 closed; authoritative on remote) |
-| Build authorization | **Conditionally approved** — pending Gates 0.5, 0.6, and Gate 0 signature |
-| Countdown to implementation (T0) | **Not started** |
+| Implementation governance | **Entered** — may complete Gate 0, capacity/IP, ADR-0005, eval v0, infra inventory |
+| Build authorization (coding) | **Blocked** until Gates 0.5, 0.6, and Gate 0 are signed |
+| Countdown to implementation (T0) | **Not started** — starts only after Gate 0 signature |
 | Production / soft-launch deployment | **Not yet** |
 
-**GO for implementation planning. Not a GO for execution** until Gate 0 is formally signed.
+**Allowed now:** implementation governance work (Gate 0 fill-in, scheduling, inventory, eval drafting, ADR-0005).  
+**Not allowed yet:** counting T0 / writing production Phase B runtime code until Gate 0 is formally signed.
 
 ### Readiness states (no numerical scores)
 
