@@ -22,7 +22,9 @@
 | [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) | Disposition |
 | [`adr/`](./adr/) | ADRs |
 | [`registry/TECHNOLOGY.md`](./registry/TECHNOLOGY.md) | Tech registry |
-| [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md) | North-star doctrine |
-| [`../architecture/PHASE-B-SLICE.md`](../architecture/PHASE-B-SLICE.md) | Doctrine → Phase B mapping |
+| [`../architecture/TRONIXMESH-ARCHITECTURE-v2.md`](../architecture/TRONIXMESH-ARCHITECTURE-v2.md) | Architecture Write-Up v2.0 |
+| [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md) | Condensed doctrine |
+| [`../architecture/PHASE-B-SLICE.md`](../architecture/PHASE-B-SLICE.md) | Architecture → Phase B mapping |
 
-> Agents reason. The runtime governs. Humans retain ultimate authority.
+> Agents reason. The runtime governs. Humans retain ultimate authority.  
+> Governance is a property of the coordinate address space (Provisional 64/072,487).

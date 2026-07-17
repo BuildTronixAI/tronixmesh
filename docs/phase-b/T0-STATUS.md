@@ -6,11 +6,12 @@
 
 ## Doctrine alignment
 
-North star: [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md)  
+Architecture v2.0: [`../architecture/TRONIXMESH-ARCHITECTURE-v2.md`](../architecture/TRONIXMESH-ARCHITECTURE-v2.md)  
+Condensed doctrine: [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md)  
 Phase B slice: [`../architecture/PHASE-B-SLICE.md`](../architecture/PHASE-B-SLICE.md)
 
-**In force now:** fail-closed · runtime owns handoff authority · LLM untrusted · proof-native schema · hash-chain audit.  
-**Deferred:** Decision Tokens · full governance engine · BOB/Robert/Council personas (Phase C+).
+**In force now:** coordinate-native addressing · fail-closed · runtime owns handoff authority · LLM untrusted · proof-native schema · hash-chain audit · four-topology invariants (reduced).  
+**Deferred:** Decision Tokens · Witness/Little Voice · Heartbeat force-tests · RR-0056 Postgres · BOB/Robert/Council personas (Phase C+).
 
 ## Delivered this increment
 

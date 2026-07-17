@@ -4,7 +4,7 @@
 **Status:** Normative north star (implementation is phased)  
 **Authority:** Christopher C. Leiser, Chairman  
 **Recorded:** 2026-07-17  
-**Related:** Phase B plan · Doctrine Bundle v1.1 · ADRs · [`PHASE-B-SLICE.md`](./PHASE-B-SLICE.md)
+**Related:** [`TRONIXMESH-ARCHITECTURE-v2.md`](./TRONIXMESH-ARCHITECTURE-v2.md) (comprehensive write-up) · Phase B plan · Doctrine Bundle v1.1 · ADRs · [`PHASE-B-SLICE.md`](./PHASE-B-SLICE.md)
 
 ---
 
