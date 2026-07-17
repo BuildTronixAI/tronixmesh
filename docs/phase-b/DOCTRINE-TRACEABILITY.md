@@ -3,7 +3,7 @@
 **Artifact role:** Gate 1 — highest-leverage remaining governance artifact  
 **Purpose:** Authoritative map so every production requirement answers: *missing, or already specified?*  
 **Rule:** Prefer pointer + test over new documentation. One matrix; no parallel checklists.  
-**Plan state contribution:** Required to exit **Conditionally Ready** → **Architecture Complete** / **Production Ready**  
+**Plan state contribution:** Required for **Plan Validated** / architecture approval (E1). Does not alone authorize execution.  
 **Updated:** 2026-07-17
 
 ## Status legend
