@@ -53,7 +53,7 @@ export default function Contact() {
         <div className="text-center mb-12">
           <h1 className="text-white mb-4">Get in Touch</h1>
           <p className="text-gray-400 text-lg">
-            If you're building autonomous systems at scale in regulated industries — let's talk.
+            If you&apos;re building autonomous systems at scale in regulated industries — let&apos;s talk.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function Contact() {
           {submitted ? (
             <div className="text-center py-12">
               <h2 className="text-white text-2xl font-bold mb-4">Thank You</h2>
-              <p className="text-gray-400 mb-2">We've received your inquiry.</p>
+              <p className="text-gray-400 mb-2">We&apos;ve received your inquiry.</p>
               <p className="text-gray-400">Our team will be in touch shortly.</p>
             </div>
           ) : (

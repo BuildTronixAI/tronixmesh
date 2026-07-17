@@ -4,12 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NEXT_ADAPTER_PATH=\"$(node -p \"require.resolve(\\\"@next-community/adapter-vercel\\\")\")\" next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
-    "next": "16.2.6",
+    "@next-community/adapter-vercel": "^0.0.0",
+    "@vercel/build-utils": "^13.34.0",
+    "@vercel/routing-utils": "^6.4.0",
+    "next": "16.2.10",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -19,7 +25,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

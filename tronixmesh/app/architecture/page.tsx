@@ -48,7 +48,7 @@ export default function Architecture() {
             These planes integrate with your existing systems. APIs for AI agents, robotics platforms, sensor networks, and legacy control systems. Enterprise-grade governance without replacing your infrastructure.
           </p>
           <p className="text-gray-400 leading-relaxed">
-            Details available under NDA. <a href="/contact" className="text-blue font-semibold">Let's talk.</a>
+            Details available under NDA. <a href="/contact" className="text-blue font-semibold">Let&apos;s talk.</a>
           </p>
         </div>
       </section>

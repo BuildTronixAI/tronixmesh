@@ -67,13 +67,13 @@ export default function Home() {
         <h1 className="text-white mb-8 leading-tight">
           AI systems can fail, drift, collude,<br className="hidden md:block" />
           or hallucinate authority.<br className="hidden md:block" />
-          <span className="text-blue">TronixMesh governs the ones that can't be wrong.</span>
+          <span className="text-blue">TronixMesh governs the ones that can&apos;t be wrong.</span>
         </h1>
         <p className="text-xl text-gray-400 mb-4 max-w-3xl mx-auto leading-relaxed">
           TronixMesh is the governance layer that can halt, constrain, recover, and prove what happened — even when the AI itself is wrong.
         </p>
         <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed">
-          The Control Plane is <strong className="text-white">model-independent.</strong> Its authority derives from a cryptographically committed constitutional ruleset — not from any AI model's capability, training, or output. It may refuse execution even when all agents agree.
+          The Control Plane is <strong className="text-white">model-independent.</strong> Its authority derives from a cryptographically committed constitutional ruleset — not from any AI model&apos;s capability, training, or output. It may refuse execution even when all agents agree.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/contact" className="px-8 py-4 bg-blue text-white font-semibold rounded hover:bg-opacity-80 transition text-lg">
@@ -182,7 +182,7 @@ export default function Home() {
       <section className="border-t border-gray-700 py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <h2 className="text-white mb-4">Why Existing AI Safety Isn't Enough</h2>
+            <h2 className="text-white mb-4">Why Existing AI Safety Isn&apos;t Enough</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Model-level safety fails when the model is wrong. TronixMesh operates outside the model.
             </p>
@@ -278,7 +278,7 @@ export default function Home() {
       <section className="border-t border-gray-700 py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <h2 className="text-white mb-4">Who It's Built For</h2>
+            <h2 className="text-white mb-4">Who It&apos;s Built For</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Any organization that needs to answer: what did the AI do, who authorized it, and can you prove it?
             </p>
@@ -316,7 +316,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-white mb-6">Ready to govern your AI?</h2>
           <p className="text-gray-400 text-lg mb-10 leading-relaxed">
-            TronixMesh is in private deployment. We're working with enterprise builders, regulators, and strategic partners. Details available under NDA.
+            TronixMesh is in private deployment. We&apos;re working with enterprise builders, regulators, and strategic partners. Details available under NDA.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/architecture" className="px-8 py-4 border border-gray-600 text-gray-light font-semibold rounded hover:border-blue hover:text-blue transition">

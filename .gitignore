@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+python/*.egg-info/
+
+# Next.js app (Vercel rootDirectory)
+/tronixmesh/node_modules
+/tronixmesh/.next
+/tronixmesh/out
+/tronixmesh/.vercel

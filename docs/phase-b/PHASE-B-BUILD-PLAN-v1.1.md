@@ -5,31 +5,73 @@
 **Tenant:** Buildtronix (single) · **Domain:** Engineering (single)  
 **Baseline architecture:** v1.1 Fractal Grid + **proof-native schema** (verification phased)  
 **Supersedes:** Phase B Inner-First Build Plan (Draft, May 2026 soft-launch target)  
-**Status:** Draft for Chris Gate 0 sign-off  
-**Owners (default):** Architecture/Ops — Chris · Runtime — Robert · Security review — peer/council before release  
-**Updated:** 2026-07-16 (v1.2 refinements)  
-**Companions:** [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md)
+**Plan status:** **Approved for Build**  
+**Authorization:** [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md) — Christopher C. Leiser, Chairman  
+**Coding / T0:** **Authorized** — T0 may count  
+**Owners (default):** Architecture/Ops — Chris · Runtime — Robert (Builder) · Security review — peer/council before release  
+**Updated:** 2026-07-17 (v1.5 — Gate 0 authorized)  
+**Companions:** [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md) · [`VALIDATION-REPORT.md`](./VALIDATION-REPORT.md) · [`DOCTRINE-TRACEABILITY.md`](./DOCTRINE-TRACEABILITY.md) · [`adr/`](./adr/) · [`registry/`](./registry/)
+
+### Status board (authoritative)
+
+| Stage | Status |
+|-------|--------|
+| Architecture | **Approved** |
+| Production plan | **Validated** |
+| Implementation governance | **Active** |
+| Build authorization (coding) | **Approved** — Gate 0 signed |
+| Countdown to implementation (T0) | **Started 2026-07-17** — see [`T0-STATUS.md`](./T0-STATUS.md) |
+| Production / soft-launch deployment | **Not yet** (staged rollout R1→R3 still applies) |
+
+**Authorized now:** Phase B runtime implementation under this plan, schemas, and ADRs.  
+**Still deferred:** soft-launch / production deployment until staged rollout exits are met (§9).
+
+### Readiness states (no numerical scores)
+
+```
+Draft → Architecture Complete → Conditionally Ready → Plan Validated
+    → Conditionally Approved for Build → Approved for Build (execution authorized)  ← current
+```
+
+| State | Meaning |
+|-------|---------|
+| Approved for Build | **Current** — Gate 0 signed; T0 may count; coding authorized |
+
+**Do not use numerical review scores.**
+
+### Architectural exit gates (closed)
+
+| # | Gate | Status |
+|---|------|--------|
+| E1 | Doctrine-to-gate traceability matrix | **Done** |
+| E2 | ADR-0004 Option B (signature-agnostic) | **Done** |
+| E3 | GitHub sync | **Done** |
+| G0 | Executive Gate 0 authorization | **Done** — [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md) |
 
 ---
 
 ## Gate 0 — Streamlined Sign-Off
 
-Kickoff is blocked until these eight decisions are written and approved. This is the only pre-build checklist. It fits a founder-led org: accountability without invented committees.
+**Status: AUTHORIZED** — see [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md).
 
 | # | Gate | Decision required | Owner | Status |
 |---|------|-------------------|-------|--------|
-| G0.1 | **Architecture** | Core schemas and interfaces frozen (§1.2 proof-native envelope; address + handoff APIs) | Chris | _Open_ |
-| G0.2 | **Security** | Authn/authz, secrets, fail-closed behavior defined for Phase B scope | Chris (+ peer review before release) | _Open_ |
-| G0.3 | **Operations** | Rollback, monitoring, backups documented for pilot environment | Chris | _Open_ |
-| G0.4 | **Ownership** | Single accountable owner per major subsystem (§3.1) | Chris | _Open_ |
-| G0.5 | **Capacity** | Who builds it, what it displaces, what is deferred (§11) | Chris | _Open_ |
-| G0.6 | **IP** | Public/private/patent-sensitive boundary approved (§10) | Chris | _Open_ |
-| G0.7 | **Budget** | Infra + model spend limits approved | Chris | _Open_ |
-| G0.8 | **Execution** | Milestones and acceptance criteria defined (§3.4, §4) | Chris | _Open_ |
+| G0.1 | **Architecture** | Core schemas frozen | Chris | **Authorized** — Architecture: Approved |
+| G0.2 | **Security** | Authn/authz, secrets, fail-closed | Chris | **Authorized** — Governance: Verified; Stop Authority: Defined |
+| G0.3 | **Operations** | Rollback, monitoring, backups | Chris | **Authorized** — Rollback: Defined |
+| G0.4 | **Ownership** | Single owner per subsystem | Chris | **Authorized** — Builder: Assigned |
+| G0.5 | **Capacity** | Who builds, what stops | Chris | **Authorized** — Builder: Assigned; Stop Authority: Defined |
+| G0.6 | **IP** | Disclosure boundary | Chris | **Authorized** — IP: Confirmed; Counsel: Complete / Deferred |
+| G0.7 | **Budget** | Infra + model spend limits | Chris | **Authorized** under executive approval; §12 caps still apply |
+| G0.8 | **Execution** | Milestones + staged rollout | Chris | **Authorized** — Approved to begin implementation |
+| G0.9 | **ADRs** | Irreversible decisions recorded | Chris | **Authorized** — ADRs: Accepted |
 
-**Remaining tactical questions** (latency split, retries, HMAC vs Ed25519 Day 1, CLI vs web ops, etc.) are answered by **T3**, not Gate 0 — see §13.
+**Retained:** FP/FN · tech registry · staged rollout.  
+**Rejected:** Separate Decision Log.
 
-Once Gate 0 is signed, Phase B is locked. Scope adds go to the Phase C queue.
+**Tactical (by T3):** retries, CLI vs web, confidence threshold, Vultr inventory → ADR-0005.  
+
+Phase B is **Approved for Build**. Scope adds during the build window → Phase C queue.
 
 ---
 
@@ -50,25 +92,53 @@ This is not a demo. It is the smallest credible reduction-to-practice of the v1.
 - **Not** multi-tenant, Decision Tokens, personas, streaming, or OpenRouter.  
 - **Not** “implement every proof-generation and verification path in v1.” Design for them; enable later.
 
-### 1.2 Proof-Native Schema, Proof-Enabled Behavior
+### 1.2 Proof-Native Schema, Feature-Flagged Behavior
 
-Proof is **not** assumed orthogonal to the data model. Envelopes already need hashes, signatures, provenance, governance-state references, and/or proof references. Retrofitting those fields later changes APIs, persistence, and compatibility.
+The dependency is **not** “envelope first, proof later.” It is:
 
-**Separation of concerns for Phase B:**
+```
+Proof model
+    → Envelope schema
+        → Storage
+            → Interfaces
+                → Behavior (feature-flagged)
+```
 
-| Design now (schema / interfaces) | Enable later (behavior) |
-|----------------------------------|-------------------------|
-| Envelope schema with reserved proof fields | Full ProofPackage verification paths |
-| Proof / governance reference slots | MeshResolver as hot-path enforcer |
+If the envelope eventually contains signature blocks, hash-chain references, governance metadata, proof identifiers, and witness coordinates, those fields influence the schema from day one. Retrofitting them later forces API, persistence, and compatibility migrations.
+
+| Layer | Rule |
+|-------|------|
+| **Schema** | Proof-native — fields present, versioned, and persisted |
+| **Behavior** | Feature-flagged — verification / MeshResolver / distributed enforcement can be off, stubbed, or partial |
+
+| Design now (schema / interfaces) | Enable later (flagged behavior) |
+|----------------------------------|---------------------------------|
+| Envelope schema with proof fields | Full ProofPackage verification paths |
+| Proof / governance / witness reference slots | MeshResolver as hot-path enforcer |
 | Signature blocks (structure + verify hook) | Distributed enforcement |
 | Schema versioning + compatibility policy | Cross-node consensus |
 
-**Phase B implements:** populate and persist proof-relevant fields; hash-chain provenance; signature verify at boundaries where keys exist; fail-closed channel rules.  
-**Phase B may stub or no-op:** full MeshResolver 13-step pipeline, Doctrine-1B crypto authenticity, distributed verification.
+**Phase B implements:** populate and persist proof-relevant fields; hash-chain provenance; signature verify where keys exist; fail-closed channel rules.  
+**Phase B may feature-flag off:** full MeshResolver 13-step pipeline, Doctrine-1B crypto authenticity, distributed verification.
 
-**Narrow product claim (refined):** If patentable differentiation depends on proof and governance, the architecture must **preserve those capabilities from the outset**. That does **not** mean every proof path ships in Phase B — only that foundational schema and interfaces must not preclude them.
+**Narrow claim:** If patentable differentiation depends on proof and governance, preserve those capabilities in schema/interfaces from the outset — without shipping every verification path in Phase B.
 
-Default planning assumption: **proof-native v1.1 envelopes** as the pilot substrate; MeshResolver/ProofPackage attach later without schema break.
+Default: **proof-native v1.1 envelopes**; MeshResolver/ProofPackage attach later **without schema break**.
+
+### 1.3 Architecture Decision Records (Gate 0.9)
+
+For each irreversible decision, capture: Decision · Alternatives · Rationale · Consequences · Date.  
+Template and initial ADRs live in [`adr/`](./adr/). A handful of ADRs replaces a formal architecture board.
+
+Minimum ADRs before or at Gate 0 close:
+
+| ADR | Topic |
+|-----|-------|
+| ADR-0001 | Proof-native envelopes (schema vs behavior) |
+| ADR-0002 | LangGraph for agent orchestration |
+| ADR-0003 | PostgreSQL for provenance + task state |
+| ADR-0004 | **Accepted** — signature-agnostic envelope (Option B); Ed25519 intended first algorithm |
+| ADR-0005 | Redis vs Postgres for cell memory *(after Vultr inventory)* |
 
 ---
 
@@ -125,7 +195,7 @@ Subsystem map (one name each; same person may own multiple):
 | Subsystem | Purpose | Phase B acceptance | Owner |
 |-----------|---------|--------------------|-------|
 | Coordinate registry | Lookup + health | Versioned schema; empty-coordinate escalate | Robert |
-| Intake classifier | Assign coordinates | 3-stage; confidence + escalate | Robert |
+| Intake classifier | Assign coordinates | 3-stage; FP/FN objectives (§4.1a); confidence + escalate | Robert |
 | Routing + channel rules | Enforce boundaries | Fail-closed; default-deny | Robert |
 | Context Envelope library | Ser/de + proof-native fields | Schema freeze; signature hook | Robert |
 | Minimal authority | Sensitivity↑ without Decision Tokens | Bootstrap/static grant verify | Robert |
@@ -143,17 +213,18 @@ Gate 0.4 confirms or overrides this table. Do **not** require four owners per co
 | Layer | Choice | Notes |
 |-------|--------|-------|
 | Language | Python 3.11+ | Aligns with reference Mesh package |
-| Orchestration | LangGraph | Agent chain only — not a substitute for channel/provenance |
-| Envelope | JSON + signature block (Ed25519 preferred) | Proof fields present even if verify is partial |
-| Provenance / task state | PostgreSQL | Append-only ledger; app role cannot UPDATE/DELETE ledger |
-| Cell memory | Redis **or** Postgres JSONB | Match what Vultr already has |
-| Classifier | Rules (hot path) + Haiku escalate | Separate latency metrics (§4.3) |
+| Orchestration | LangGraph | Agent chain only — not a substitute for channel/provenance · ADR-0002 |
+| Envelope | JSON + **signature-agnostic** block | Frozen fields per ADR-0004; verify feature-flagged · ADR-0001/0004 |
+| Provenance / task state | PostgreSQL | Append-only ledger · ADR-0003 |
+| Cell memory | Redis **or** Postgres JSONB | Match Vultr inventory · ADR-0005 |
+| Classifier | Rules (hot path) + Haiku escalate | FP/FN objectives; separate latency metrics |
 | Telemetry | OpenTelemetry → existing sink | `task_id`, `handoff_id`, `envelope_hash` |
 | Deploy | Existing Vultr | Capacity check at T0 |
 | Secrets | Existing KMS/Vault or sealed env + rotation runbook | Document any downgrade |
 | Model APIs | Direct Gemini / Anthropic | No OpenRouter |
 
-Interface stub for later MeshResolver attach: thin adapter behind the envelope/channel API — **no dual implementation** in Phase B.
+Technology status is tracked in [`registry/TECHNOLOGY.md`](./registry/TECHNOLOGY.md) (**approved / rejected / experimental**).  
+Interface stub for later MeshResolver attach: thin adapter behind envelope/channel API — **no dual implementation** in Phase B.
 
 ### 3.3 Delivery Semantics
 
@@ -204,6 +275,18 @@ Do **not** invent duplicate gate docs where doctrine already specifies the invar
 | M5 | Valid hash-chained provenance | 100% |
 | M6 | Sensitivity↑ has valid minimal authority artifact | 100% |
 | M7 | Envelope carries required proof-native fields (populated or explicitly null-versioned) | Schema contract test |
+
+### 4.1a Classifier Objectives (FP/FN) — Retained from Original Review
+
+Accuracy alone is insufficient. Track false positives and false negatives on the labeled eval set:
+
+| Error | Definition (Phase B) | Target | Why it matters |
+|-------|----------------------|--------|----------------|
+| **FP** | Routed to confidential / higher-sensitivity coordinate when gold is public-only (or wrong function) | FP rate ≤ 2% on clean public set | Unauthorized sensitivity↑ / wrong worker |
+| **FN** | Failed to escalate or assign confidential/structure when gold requires boundary crossing | FN rate ≤ 5% on boundary set | Missed governed path; silent under-routing |
+| **Ambiguity handling** | Low-confidence cases that should escalate but were forced | 0 silent forced routes | F2 |
+
+Report confusion matrix + FP/FN at every eval campaign. Tune thresholds against these objectives, not headline accuracy alone.
 
 ### 4.2 Failure Modes (F)
 
@@ -338,63 +421,58 @@ Phase C (Decision Tokens, approval gates) only after B exit. Doctrine-1B schedul
 
 ---
 
-## 9. Soft Launch Definition (Proposed)
+## 9. Staged Rollout & Soft Launch (Gate 0.8)
 
-| Dimension | Proposal |
-|-----------|----------|
-| Audience | Chris + 2–3 named Buildtronix users |
+Retained staged model (original review). Do not jump stages.
+
+| Stage | Audience | Exit to next |
+|-------|----------|--------------|
+| **R1 Synthetic** | Eval harness + injected failures only | M/F/A green on synthetic set |
+| **R2 Internal** | Chris (+ Robert as operator) | 3 consecutive days, no unrecoverable failure |
+| **R3 Trusted users** | 2–3 named Buildtronix users | 14 days; ACL + S5 pass; manual review before business action |
+| **R4 Production** | Broader / customer-facing | **Out of Phase B** — Phase D+ |
+
+| Dimension (R3) | Proposal |
+|----------------|----------|
 | Access | Allowlisted; per-task ACL |
 | Volume | 10–20 real tasks/day + continuous synthetic eval |
 | Mode | `pilot=true`; manual review before business action |
-| Duration | 14 days → Phase C planning |
 | Success | No unrecoverable failure; no security incident; alerts explained |
 | Copy | “Internal pilot — not certified constitutional governance” |
 | On-call | Chris primary; backup named at Gate 0 |
 
 ---
 
-## 10. IP Posture (Gate 0.6)
+## 10. IP Posture (Gate 0.6) — Authorized
 
-Not merely document classification. Implementation may support **patent claims** and **trade secrets**.
+**Gate 0 status:** IP: **Confirmed** · Counsel: **Complete / Deferred** (see [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md)).
 
-Before Gate 0 closes, Chris approves:
+Not merely document classification. Treat implementation visibility as an **IP decision**. Distinguish two concerns — and **do not make categorical legal claims** without attorney input:
 
-| Question | Decision |
-|----------|----------|
-| What is safe to disclose **before** non-provisional filing? | _TBD_ |
-| What remains confidential **regardless** of patent status? | _TBD_ |
-| Which code, docs, eval fixtures, and examples stay in **private** repos? | _TBD_ |
-| May this planning pack remain in the public `tronixmesh` marketing repo? | _TBD_ |
-| Provisional 64/072,487 — any Phase B RTP artifacts that must be counsel-reviewed before publish? | _TBD_ |
+| Concern | Practical note |
+|---------|----------------|
+| **Patent rights** | Public disclosure before or around filing dates can affect strategy; U.S. and international rules differ. Coordinate timing/content with patent counsel (Provisional 64/072,487 → non-provisional path). |
+| **Trade secrets** | Publicly releasing implementation details generally eliminates trade-secret protection for those details. |
 
-**Default until overridden:** Runtime RTP code, envelope schema details that embody claim elements, eval fixtures with internal capability data, and failure-injection harness → **private eng repository**. Public site may describe capability at marketing altitude only. Planning docs in this PR are provisional; relocate if Gate 0.6 says private.
+**Operational default (still in force):** Keep implementation-specific material private until counsel approves disclosure. “Counsel: Complete / Deferred” authorizes build start; deferred counsel items remain disclosure-gated.
+
+**Default repo posture:** Runtime RTP code, claim-sensitive schema detail, internal capability fixtures, failure-injection harness → **private eng repository**. Public site stays at marketing altitude.
 
 ---
 
-## 11. Capacity Planning (Gate 0.5)
+## 11. Capacity Planning (Gate 0.5) — Authorized
 
-A technically perfect plan that assumes unlimited engineering capacity is invalid.
+**Gate 0 status:** Builder: **Assigned** · Stop Authority: **Defined** (see [`GATE-0-AUTHORIZATION.md`](./GATE-0-AUTHORIZATION.md)).
 
-**Displacement statement (required at Gate 0):**
+Primary question remains: **Who builds this, and what stops while they do?**
 
-| Initiative | Status during Phase B window | Explicit choice |
-|------------|------------------------------|-----------------|
-| Robert / TronixMesh runtime (this plan) | _Primary / paused / shared %_ | _TBD_ |
-| Pre-Con | _Continue / freeze / reduce_ | _TBD_ |
-| Clover | _Continue / freeze / reduce_ | _TBD_ |
-| AMS | _Continue / freeze / reduce_ | _TBD_ |
-| FedTronix | _Continue / freeze / reduce_ | _TBD_ |
-| Carl’s Wine Vault | _Continue / freeze / reduce_ | _TBD_ |
-| Marketing site / other | _Continue / freeze / reduce_ | _TBD_ |
+| Role | Assignment |
+|------|------------|
+| Builder (runtime) | Robert |
+| Architecture / ops / stop authority | Chris |
+| Stop authority | Defined (kill switch / halt per plan) |
 
-Also state:
-
-1. **Who builds** (default: Robert runtime, Chris architecture/ops).  
-2. **Hours/week available** in the T0–T30 window.  
-3. **What is deferred** if capacity is insufficient (ordered cut list: dashboard already cut; next cuts…).  
-4. **What slips** if Robert/TronixMesh is not the primary bet for that window.
-
-No kickoff without this table filled.
+**Displacement detail** (ops refinement; does not reopen Gate 0): maintain the portfolio table as work proceeds — Pre-Con, Clover, AMS, FedTronix, Carl’s Wine Vault, marketing — so scheduling stays explicit under Stop Authority.
 
 ---
 
@@ -422,7 +500,7 @@ Gate 0 replaces the old Q1–Q10 blocking wall. These remain for early execution
 5. Soft-launch audience names + real vs synthetic confidential data?  
 6. Classifier confidence threshold?  
 7. `max_retries` / timeout / lease budgets?  
-8. HMAC acceptable Day 1 or Ed25519 mandatory?  
+8. ~~HMAC vs Ed25519 schema~~ → **closed** by ADR-0004 (opaque layout; Ed25519 intended first).  
 9. Operator surface: CLI-only or minimal web page?  
 10. Relationship to Design^BOB / Competitive Intel — wrap, rewrite, or strangler?  
 11. Address canonicalization: keep v1.1 dotted form only, or dual-encode v2.3 8-tuple as alias in schema now?  
@@ -434,7 +512,10 @@ Gate 0 replaces the old Q1–Q10 blocking wall. These remain for early execution
 | Version | Date | Notes |
 |---------|------|-------|
 | Draft | ~May 2026 | Original Phase B plan (May 30 target) |
-| v1.1-PRODUCTION | 2026-07-16 | First production hardening pass |
-| v1.2-PRODUCTION | 2026-07-16 | Proof-native schema; founder-scale ownership; IP posture; doctrine-first gates; capacity displacement; streamlined Gate 0 |
+| v1.1–v1.3 | 2026-07-16 | Production hardening sequence |
+| v1.4-PRODUCTION | 2026-07-17 | E1–E3 closed; ADR-0004 Option B |
+| v1.4.1 | 2026-07-17 | Status clarified: Validated + Conditionally Approved for Build; execution blocked on Gate 0.5/0.6/0 |
+| v1.4.2 | 2026-07-17 | Implementation governance entered; Gate 0 = authorization control before coding |
+| v1.5 | 2026-07-17 | Gate 0 authorized by Christopher C. Leiser — **Approved for Build**; T0 may count |
 
-*End of Phase B Inner-First Build Plan (Production v1.2).*
+*End of Phase B Inner-First Build Plan (Production v1.5).*
