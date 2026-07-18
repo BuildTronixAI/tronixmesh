@@ -39,7 +39,8 @@
 | Eval set v0 (synthetic) | `python/evals/v0/` |
 | Governance state vocabulary | `governance.py` (fail-closed transitions; full engine later) |
 | Feature-flagged verify | `flags.py` |
-| Competitive intel 3-agent pilot | One public→confidential boundary; Engineering only |
+| Competitive intel 3-agent pilot | LangGraph chain `agents/chain.py` — Mesh runner governs handoffs; stub workers |
+| Task store + operator CLI | `taskstore.py` / `cli.py` (`tronixmesh-ops`) |
 
 ---
 
