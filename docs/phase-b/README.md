@@ -10,7 +10,7 @@
 | Architecture | Approved |
 | Production plan | Validated |
 | Gate 0 | Authorized |
-| Coding / T0 | **In progress** — LangGraph pilot + operator CLI (see T0-STATUS) |
+| Coding / T0–T23 | **In progress** — T8+ agents, eval v1, chaos, CI (see T0-STATUS) |
 | Soft-launch / production deploy | Not yet (staged rollout) |
 
 | Doc | Purpose |

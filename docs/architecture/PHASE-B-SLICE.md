@@ -39,8 +39,13 @@
 | Eval set v0 (synthetic) | `python/evals/v0/` |
 | Governance state vocabulary | `governance.py` (fail-closed transitions; full engine later) |
 | Feature-flagged verify | `flags.py` |
-| Competitive intel 3-agent pilot | LangGraph chain `agents/chain.py` — Mesh runner governs handoffs; stub workers |
+| Competitive intel 3-agent pilot | LangGraph chain `agents/chain.py` — Mesh runner governs handoffs |
+| Pluggable workers | `agents/providers.py` — stub default; Anthropic/Gemini via env |
 | Task store + operator CLI | `taskstore.py` / `cli.py` (`tronixmesh-ops`) |
+| Telemetry correlation | `telemetry.py` — correlation_id on provenance |
+| Security floor | `security.py` — cross-cell / signature / no model authority |
+| Eval v1 campaign | `evals/v1/` — FP/FN reporter |
+| Postgres DSN helper | `postgres.py` — ping when `TRONIX_DATABASE_URL` set |
 
 ---
 

@@ -10,6 +10,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
+from .telemetry import enrich_payload
+
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -93,10 +95,11 @@ class ProvenanceStore:
     ) -> ProvenanceEvent:
         prev = self.tip_hash()
         created_at = _utc_now()
+        enriched = enrich_payload(payload)
         body = {
             "task_id": task_id,
             "event_type": event_type,
-            "payload": payload or {},
+            "payload": enriched,
             "created_at": created_at,
         }
         entry_hash = _hash_entry(prev, body)
@@ -108,7 +111,7 @@ class ProvenanceStore:
             (
                 task_id,
                 event_type,
-                json.dumps(payload or {}, sort_keys=True),
+                json.dumps(enriched, sort_keys=True),
                 prev,
                 entry_hash,
                 created_at,
@@ -119,7 +122,7 @@ class ProvenanceStore:
             seq=int(cur.lastrowid),
             task_id=task_id,
             event_type=event_type,
-            payload=payload or {},
+            payload=enriched,
             prev_hash=prev,
             entry_hash=entry_hash,
             created_at=created_at,

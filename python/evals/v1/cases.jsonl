@@ -1,0 +1,20 @@
+{"id": "pub-001", "sensitivity_class": "public", "intent": {"function": "research", "confidence": 0.95}, "gold_action": "route", "gold_function": "research"}
+{"id": "pub-002", "sensitivity_class": "public", "intent": {"function": "competitive_research", "confidence": 0.9}, "gold_action": "route", "gold_function": "competitive_research"}
+{"id": "pub-003", "sensitivity_class": "public", "intent": {"function": "research", "confidence": 0.8}, "gold_action": "route", "gold_function": "research"}
+{"id": "pub-004", "sensitivity_class": "public", "intent": {"function": "research", "confidence": 0.76}, "gold_action": "route", "gold_function": "research"}
+{"id": "pub-005", "sensitivity_class": "public", "intent": {"function": "research", "confidence": 0.99}, "gold_action": "route", "gold_function": "research"}
+{"id": "pub-006", "sensitivity_class": "public", "intent": {"function": "unknown_worker", "confidence": 0.99}, "gold_action": "escalate", "gold_function": "unknown_worker"}
+{"id": "bnd-001", "sensitivity_class": "boundary", "intent": {"function": "structure", "confidence": 0.92, "requires_confidential": true}, "gold_action": "route", "gold_function": "structure"}
+{"id": "bnd-002", "sensitivity_class": "boundary", "intent": {"function": "structure_confidential", "confidence": 0.88}, "gold_action": "route", "gold_function": "structure_confidential"}
+{"id": "bnd-003", "sensitivity_class": "boundary", "intent": {"function": "review_gate", "confidence": 0.91}, "gold_action": "route", "gold_function": "review_gate"}
+{"id": "bnd-004", "sensitivity_class": "boundary", "intent": {"function": "structure", "confidence": 0.85, "requires_confidential": true}, "gold_action": "route", "gold_function": "structure"}
+{"id": "bnd-005", "sensitivity_class": "boundary", "intent": {"function": "review", "confidence": 0.9}, "gold_action": "route", "gold_function": "review"}
+{"id": "amb-001", "sensitivity_class": "ambiguous", "intent": {"function": "research", "candidates": ["research", "structure"], "confidence": 0.55}, "gold_action": "escalate", "gold_function": "research"}
+{"id": "amb-002", "sensitivity_class": "ambiguous", "intent": {"confidence": 0.4}, "gold_action": "escalate", "gold_function": null}
+{"id": "amb-003", "sensitivity_class": "ambiguous", "intent": {"function": "research", "confidence": 0.5}, "gold_action": "escalate", "gold_function": "research"}
+{"id": "amb-004", "sensitivity_class": "ambiguous", "intent": {"function": "structure", "confidence": 0.6, "candidates": ["structure", "review"]}, "gold_action": "escalate", "gold_function": "structure"}
+{"id": "amb-005", "sensitivity_class": "ambiguous", "intent": {"function": "review", "confidence": 0.2}, "gold_action": "escalate", "gold_function": "review"}
+{"id": "neg-001", "sensitivity_class": "public", "intent": {"function": "review", "confidence": 0.95}, "gold_action": "route", "gold_function": "review", "notes": "public-class intent that still routes to review coord — not FP if gold says route"}
+{"id": "neg-002", "sensitivity_class": "boundary", "intent": {"function": "structure", "confidence": 0.4}, "gold_action": "escalate", "gold_function": "structure", "notes": "low confidence boundary must escalate (not FN if gold escalate)"}
+{"id": "neg-003", "sensitivity_class": "public", "intent": {"function": "research", "candidates": ["research", "review"], "confidence": 0.9}, "gold_action": "escalate", "gold_function": "research"}
+{"id": "neg-004", "sensitivity_class": "boundary", "intent": {"function": "structure_confidential", "confidence": 0.78}, "gold_action": "route", "gold_function": "structure_confidential"}

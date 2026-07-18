@@ -1,0 +1,29 @@
+name: Python CI
+
+on:
+  push:
+    paths:
+      - "python/**"
+      - ".github/workflows/python-ci.yml"
+  pull_request:
+    paths:
+      - "python/**"
+      - ".github/workflows/python-ci.yml"
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Test
+        run: pytest -q
+      - name: Eval campaign v1
+        run: python -m tronixmesh.cli eval-campaign --set v1

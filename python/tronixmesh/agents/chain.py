@@ -24,6 +24,7 @@ from ..registry import CoordinateRegistry
 from ..router import RESEARCH_PUBLIC, REVIEW_CONF, STRUCTURE_CONF, RulesRouter
 from ..runner import IdempotentStepRunner, StepResult
 from ..taskstore import TaskStatus, TaskStore
+from ..telemetry import new_correlation_id, reset_correlation_id, set_correlation_id
 from . import workers
 
 
@@ -270,22 +271,39 @@ class CompetitiveIntelChain:
 
     def start(self, query: str, *, task_id: Optional[str] = None) -> PilotState:
         tid = task_id or str(uuid.uuid4())
-        if self.runtime.tasks.get(tid) is None:
-            self.runtime.tasks.create(tid, step="start", payload={"query": query})
-        else:
-            self.runtime.tasks.update(
-                tid, status=TaskStatus.RUNNING, step="start", payload={"query": query}, clear_error=True
+        cid = new_correlation_id()
+        token = set_correlation_id(cid)
+        try:
+            if self.runtime.tasks.get(tid) is None:
+                self.runtime.tasks.create(
+                    tid, step="start", payload={"query": query, "correlation_id": cid}
+                )
+            else:
+                self.runtime.tasks.update(
+                    tid,
+                    status=TaskStatus.RUNNING,
+                    step="start",
+                    payload={"query": query, "correlation_id": cid},
+                    clear_error=True,
+                )
+
+            self.runtime.provenance.append(
+                task_id=tid,
+                event_type="TASK_START",
+                payload={"query": query, "correlation_id": cid},
             )
 
-        initial: PilotState = {
-            "task_id": tid,
-            "query": query,
-            "status": TaskStatus.RUNNING.value,
-            "error": None,
-            "last_step": "start",
-        }
-        result = self.graph.invoke(initial)
-        return result  # type: ignore[return-value]
+            initial: PilotState = {
+                "task_id": tid,
+                "query": query,
+                "status": TaskStatus.RUNNING.value,
+                "error": None,
+                "last_step": "start",
+            }
+            result = self.graph.invoke(initial)
+            return result  # type: ignore[return-value]
+        finally:
+            reset_correlation_id(token)
 
     def resume(self, task_id: str) -> PilotState:
         rec = self.runtime.tasks.get(task_id)

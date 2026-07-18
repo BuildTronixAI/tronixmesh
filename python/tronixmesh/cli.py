@@ -97,6 +97,14 @@ def cmd_list(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_eval_campaign(args: argparse.Namespace) -> int:
+    from evals.v1.campaign import report_json, run_campaign
+
+    report = run_campaign(set_name=args.set)
+    print(report_json(report))
+    return 0 if report.meets_floor else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="tronixmesh-ops",
@@ -138,6 +146,10 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
     )
     ls.set_defaults(func=cmd_list)
+
+    ev = sub.add_parser("eval-campaign", help="Run classifier eval campaign (v1)")
+    ev.add_argument("--set", default="v1", choices=["v1"])
+    ev.set_defaults(func=cmd_eval_campaign)
 
     return p
 
