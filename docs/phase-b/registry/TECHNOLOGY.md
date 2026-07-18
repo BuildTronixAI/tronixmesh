@@ -10,8 +10,8 @@ Status: **approved** (use in Phase B) · **experimental** (allowed behind flag /
 | Envelope signature block (agnostic layout) | Approved | Frozen fields · ADR-0004 |
 | Ed25519 | Approved | Intended first `algorithm_id` · ADR-0004 |
 | HMAC-SHA256 | Experimental | Same opaque layout only; no schema fork · ADR-0004 |
-| Redis | Experimental | Only if already on Vultr · ADR-0005 |
-| Postgres JSONB cell memory | Approved | Default if Redis absent |
+| Redis | Rejected (Phase B) | Not on inventory · ADR-0005 Accepted |
+| Postgres JSONB cell memory | Approved | Phase B cell memory · ADR-0005; SQLite JSON local stand-in |
 | OpenTelemetry | Approved | Traces/metrics |
 | Honeycomb (or existing sink) | Experimental | Use existing sink first |
 | HashiCorp Vault / cloud KMS | Experimental | Prefer existing; else sealed env + runbook |

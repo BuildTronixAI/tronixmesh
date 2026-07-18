@@ -10,7 +10,7 @@
 | Architecture | Approved |
 | Production plan | Validated |
 | Gate 0 | Authorized |
-| Coding / T0 | **In progress** (12 pytest passing) |
+| Coding / T0 | **In progress** — router, cell memory, eval v0 (see T0-STATUS) |
 | Soft-launch / production deploy | Not yet (staged rollout) |
 
 | Doc | Purpose |

@@ -33,6 +33,10 @@
 | Minimal authority (Decision Token stand-in) | `authority.py` bootstrap grants |
 | Proof-native envelope + signatures | `envelope.py` / `signing.py` |
 | Append-only audit / hash chain | `provenance.py` (SQLite; RR-0056 direction) |
+| Cell memory (TTL + scope tags) | `memory.py` — Postgres JSONB logical · ADR-0005; SQLite stand-in |
+| Rules router + escalate-on-ambiguity | `router.py` |
+| Idempotent step runner + fault injection | `runner.py` / `faults.py` |
+| Eval set v0 (synthetic) | `python/evals/v0/` |
 | Governance state vocabulary | `governance.py` (fail-closed transitions; full engine later) |
 | Feature-flagged verify | `flags.py` |
 | Competitive intel 3-agent pilot | One public→confidential boundary; Engineering only |

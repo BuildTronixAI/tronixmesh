@@ -2,7 +2,8 @@
 
 **T0 started:** 2026-07-17  
 **Authorization:** Gate 0 signed — Christopher C. Leiser, Chairman  
-**Plan status:** Approved for Build
+**Plan status:** Approved for Build  
+**Updated:** 2026-07-18
 
 ## Doctrine alignment
 
@@ -10,10 +11,10 @@ Architecture v2.0: [`../architecture/TRONIXMESH-ARCHITECTURE-v2.md`](../architec
 Condensed doctrine: [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md)  
 Phase B slice: [`../architecture/PHASE-B-SLICE.md`](../architecture/PHASE-B-SLICE.md)
 
-**In force now:** coordinate-native addressing · fail-closed · runtime owns handoff authority · LLM untrusted · proof-native schema · hash-chain audit · four-topology invariants (reduced).  
-**Deferred:** Decision Tokens · Witness/Little Voice · Heartbeat force-tests · RR-0056 Postgres · BOB/Robert/Council personas (Phase C+).
+**In force now:** coordinate-native addressing · fail-closed · runtime owns handoff authority · LLM untrusted · proof-native schema · hash-chain audit · four-topology invariants (reduced) · Postgres JSONB cell memory (ADR-0005).  
+**Deferred:** Decision Tokens · Witness/Little Voice · Heartbeat force-tests · RR-0056 Postgres production DSN · BOB/Robert/Council personas (Phase C+) · Redis.
 
-## Delivered this increment
+## Delivered
 
 | Item | Location | Tests |
 |------|----------|-------|
@@ -27,19 +28,24 @@ Phase B slice: [`../architecture/PHASE-B-SLICE.md`](../architecture/PHASE-B-SLIC
 | Handoff primitive | `python/tronixmesh/handoff.py` | pass |
 | Feature flags | `python/tronixmesh/flags.py` | — |
 | Governance state types (fail-closed transitions) | `python/tronixmesh/governance.py` | pass |
+| Vultr inventory (T0) | `docs/phase-b/ops/VULTR-INVENTORY.md` | — |
+| ADR-0005 Accepted (Postgres JSONB cell memory) | `docs/phase-b/adr/0005-cell-memory-store.md` | — |
+| Cell memory (scoped TTL; SQLite stand-in) | `python/tronixmesh/memory.py` | pass |
+| Rules router (escalate on ambiguity) | `python/tronixmesh/router.py` | pass |
+| Idempotent step runner + fault injection | `python/tronixmesh/runner.py` / `faults.py` | pass |
+| Eval set v0 (synthetic) | `python/evals/v0/` | pass |
 
 ```bash
 cd python && pip install -e ".[dev]" && pytest
-# 15 passed
 ```
 
-## Next (T0–T3 / T4–T8)
+## Next (T8–T16)
 
-1. Accept ADR-0005 after Vultr inventory  
-2. Postgres-backed provenance (beyond SQLite) when infra ready  
-3. Routing layer + failure-injection harness  
-4. Three agent runtimes (research / structure / review)  
-5. Eval set v0 drafting  
+1. Wire Postgres DSN when Vultr host is confirmed (provenance + cell memory)  
+2. Three agent runtimes (research / structure / review) on LangGraph — enforcement stays outside  
+3. Operator CLI surface (resume / quarantine / replay)  
+4. Eval v1 gold labels + FP/FN campaign reporting  
+5. Backup/restore drill (A5) once Postgres exists  
 
 ## IP note
 
