@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tronixmesh"
-version = "0.1.0"
+version = "0.2.0"
 description = "Tronix Mesh Phase B runtime — proof-native envelopes, coordinates, provenance"
 readme = "README.md"
 requires-python = ">=3.11"
