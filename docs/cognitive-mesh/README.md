@@ -85,6 +85,7 @@ lock Cognitive Architecture v1.0 (canonical)
 | Cognitive Architecture Directive | v0.9 | Doctrine (non-normative) | [`TRONIXMESH_COGNITIVE_ARCHITECTURE_DIRECTIVE_v0.9.md`](./TRONIXMESH_COGNITIVE_ARCHITECTURE_DIRECTIVE_v0.9.md) |
 | Epistemic Substrate Spec | v0.2 | **Active — the current build target** | [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md) |
 | Epistemic Substrate Spec | v0.1 | **Superseded** (history only; do not implement) | [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1.md) |
+| Epistemic Substrate v0.1 — Review Record | — | Closed (findings, severities, downstream gates) | [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1_REVIEW.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1_REVIEW.md) |
 | Reconciliation Protocol | — | **Next artifact** (blocked on substrate v0.2 being total, coherent, trust-boundary-explicit, and mechanically testable) | *not yet produced* |
 | Cognitive Mesh v0 experiment | — | Pending | *not yet produced* |
 | Cognitive Architecture Directive | v1.0 | **Do not lock yet** | *pending experiment* |
@@ -96,7 +97,10 @@ transition is *accepted, rejected, quarantined, abstained, or escalated* against
 **Why v0.1 was superseded:** a full review found blocking internal contradictions (governance gating
 belief commit, a non-total state machine, threshold dead zones) and two incorrect core numeric
 mechanisms (the dependence discount pushed belief toward *false*; the calibration score measured
-*accuracy*, not calibration). v0.2 resolves all of these; see its §16 for a point-by-point disposition.
+*accuracy*, not calibration). v0.2 resolves all of these; see its §16 for a point-by-point disposition
+and the [Review Record](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1_REVIEW.md) for severities, per-finding
+fixes, and the downstream gate. **Gate:** Findings **R1–R4 and R10** (state space + confidence
+arithmetic) must land before the Reconciliation Protocol is drafted — **satisfied in v0.2**.
 
 ---
 

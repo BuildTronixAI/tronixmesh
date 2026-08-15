@@ -9,6 +9,8 @@
 
 > **Superseded notice.** This document is kept only to preserve the design history. All active work
 > targets [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md).
+> The findings that retired it — with severities, per-finding fixes, and the downstream gate — are
+> recorded in [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1_REVIEW.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1_REVIEW.md).
 **Scope:** Defines **only** the epistemic machinery below. It does **not** define the reconciliation
 protocol (the next artifact), the delegation mechanics (see the Directive §5), or any governance change.
 **Related:** [`TRONIXMESH_COGNITIVE_ARCHITECTURE_DIRECTIVE_v0.9.md`](./TRONIXMESH_COGNITIVE_ARCHITECTURE_DIRECTIVE_v0.9.md) · [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md) · [`../phase-b/adr/0001-proof-native-envelopes.md`](../phase-b/adr/0001-proof-native-envelopes.md)

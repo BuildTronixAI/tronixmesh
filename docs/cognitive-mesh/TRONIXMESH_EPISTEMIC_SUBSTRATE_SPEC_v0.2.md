@@ -681,7 +681,10 @@ pretending to remove them.
 ## 16. Disposition of review findings
 
 Every finding from the v0.1 review (the ten-point review and the twenty structural points) maps to a
-v0.2 resolution:
+v0.2 resolution. Severities, per-finding fixes, and the downstream gate are recorded in the
+[v0.1 Review Record](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1_REVIEW.md); the gate is that findings
+**R1–R4 and R10** (plus the state-space structural findings) must land before the Reconciliation
+Protocol — and they have, here.
 
 | Finding | Resolution in v0.2 |
 |---------|--------------------|
@@ -724,6 +727,11 @@ Reconciliation is still the next artifact — now gated on this v0.2 being **tot
 trust-boundary-explicit, and mechanically testable**. The reconciliation protocol will define the exact
 decision function over §9 transitions (admissibility, independence/confidence thresholds, quarantine
 triggers, escalation routing) against these schemas. It is **not** to be written on top of v0.1.
+
+The blocking review gate — findings **R1–R4 and R10** (state space + confidence arithmetic), plus the
+state-space structural findings (`S1`–`S4`, `S15`, `S16`) — is **satisfied** by this version, so the
+Reconciliation Protocol spec may be drafted against v0.2. See the
+[v0.1 Review Record](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1_REVIEW.md) §5 for the gate.
 
 ---
 
