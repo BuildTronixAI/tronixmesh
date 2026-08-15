@@ -2,9 +2,13 @@
 
 **Artifact ID:** `TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1`
 **Document type:** Specification (schema-level)
-**Status:** **v0.1 — ACTIVE BUILD TARGET** (pre-normative; canonicalization gated with the Directive)
+**Status:** **SUPERSEDED by [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md)** — retained for history; **do not implement**
 **Authority:** Christopher C. Leiser, Chairman (direction approved)
 **Recorded in-repo:** 2026-08-15
+**Superseded:** 2026-08-15 — review found blocking internal contradictions (governance gating belief commit, non-total state transitions, threshold dead zone) and two incorrect core numeric mechanisms (dependence discount, calibration-as-accuracy). v0.2 rewrites the substrate to be total, trust-boundary-explicit, and mechanically testable. See v0.2 §16 for a point-by-point disposition of the findings.
+
+> **Superseded notice.** This document is kept only to preserve the design history. All active work
+> targets [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md).
 **Scope:** Defines **only** the epistemic machinery below. It does **not** define the reconciliation
 protocol (the next artifact), the delegation mechanics (see the Directive §5), or any governance change.
 **Related:** [`TRONIXMESH_COGNITIVE_ARCHITECTURE_DIRECTIVE_v0.9.md`](./TRONIXMESH_COGNITIVE_ARCHITECTURE_DIRECTIVE_v0.9.md) · [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md) · [`../phase-b/adr/0001-proof-native-envelopes.md`](../phase-b/adr/0001-proof-native-envelopes.md)

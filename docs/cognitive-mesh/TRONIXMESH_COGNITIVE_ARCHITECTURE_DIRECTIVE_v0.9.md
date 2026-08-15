@@ -7,7 +7,7 @@
 **Recorded in-repo:** 2026-08-15
 **Becomes canonical when:** the Cognitive Mesh v0 experiment is internally executable (then, and only
 then, this is reissued as **v1.0 canonical**)
-**Related:** [`README.md`](./README.md) · [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1.md) · [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md)
+**Related:** [`README.md`](./README.md) · [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md) · [`../architecture/TRONIXMESH-DESIGN-DOCTRINE.md`](../architecture/TRONIXMESH-DESIGN-DOCTRINE.md)
 
 ---
 
@@ -39,6 +39,52 @@ detected and defeated rather than averaged into false confidence.
 The governance posture is unchanged: **agents reason, the runtime governs, humans retain ultimate
 authority.** Cognition is added *below* governance in the trust stack, never inside it.
 
+### 1.1 The narrower, defensible claim
+
+The architecture does **not** need to solve epistemology, and it must not pretend to. It does **not**
+make epistemic *truth* deterministic. Its claim is narrower and achievable:
+
+> TronixMesh makes epistemic **processing** **accountable, bounded, reproducible, corrigible, and
+> tamper-evident** — and it never treats model consensus, repetition, or cryptographic integrity as
+> proof of external-world truth.
+
+That is a stronger position than most "multi-agent reasoning" systems precisely because it stops
+pretending model agreement equals truth.
+
+### 1.2 Three categories of knowledge
+
+Every epistemic value the mesh produces is tagged with the category of knowledge it belongs to. The
+substrate spec carries the machinery; the doctrine is that these are **never** silently mixed:
+
+| Category | Meaning |
+|----------|---------|
+| **Digitally guaranteed** | Provable inside the trusted digital substrate (schema, signatures, hashes, ledger order, formal-claim contradiction, audit replay) |
+| **Estimated** | Producible only as a probabilistic estimate by a defined procedure (source/model reliability, semantic contradiction, empirical likelihood, model dependence) |
+| **Fundamentally unknowable to the substrate alone** | Requires trusting something outside the substrate (human honesty, that a sensor measured the right thing, a proprietary model's true lineage, that all evidence has been found) |
+
+### 1.3 Constitutional rules
+
+Two rules bulletproof the entire design and become normative when this area is canonical:
+
+> **CR-1 (Digital ≠ external truth).** TronixMesh SHALL distinguish facts established by the trusted
+> digital substrate from assertions about the external world. Cryptographic integrity, provenance,
+> consensus, repetition, model agreement, or schema validity SHALL NOT be interpreted as proof that an
+> external-world assertion is true.
+
+> **CR-2 (Exposed assumptions).** Every epistemic conclusion SHALL expose the trust assumptions,
+> inference method, unresolved uncertainty, and evidence lineage upon which it depends.
+
+### 1.4 Five separations
+
+v0.2 of the substrate is organized around five separations the first draft conflated. They are doctrine,
+not merely schema choices:
+
+1. **Truth state ≠ admission state ≠ integrity/quarantine state ≠ lifecycle state.**
+2. **Observation/evidence ≠ claim/inference ≠ normative preference.**
+3. **Digitally verified fact ≠ externally asserted fact.**
+4. **Probability estimate ≠ UNKNOWN** (UNKNOWN is a state, not the number 0.5).
+5. **Epistemic acceptance ≠ execution authorization.**
+
 ---
 
 ## 2. Sequencing principle (the hard part first)
@@ -53,10 +99,13 @@ contract makes everything above it hand-waving. Therefore the build order is:
    cognitive mechanics.
 2. Issue **this directive at v0.9** — doctrine, not law.
 3. Define the **epistemic substrate**: belief graph schema, evidence object, provenance/dependency
-   metadata, confidence semantics, contradiction states, calibration ledger, prediction/result
-   objects. See [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.1.md).
+   metadata, confidence semantics, status model, calibration ledger, prediction/observation objects,
+   and the trust boundaries. See [`TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md`](./TRONIXMESH_EPISTEMIC_SUBSTRATE_SPEC_v0.2.md)
+   (v0.1 superseded). Reconciliation is gated on this substrate being **total, coherent,
+   trust-boundary-explicit, and mechanically testable**.
 4. Define the **reconciliation protocol** against those schemas — exactly how a proposed belief
-   transition is *accepted, rejected, quarantined, abstained, or escalated*.
+   transition is *accepted, rejected, quarantined, abstained, or escalated*. **Do not** build it on
+   v0.1.
 5. Write **Cognitive Mesh v0** as an experiment with strong baselines; measure whether the whole
    heterogeneous architecture beats a strong single-model + tools baseline.
 6. **Only then** promote this directive to **v1.0 canonical**.
@@ -82,12 +131,16 @@ CURRENT_STATE
   requirements, and authority structure*. It does not own beliefs.
 - **EVIDENCE** is the append-only record of what has been observed (already a first-class concept in
   the evidence model and provenance hash chain).
-- **CURRENT_STATE** owns the **belief graph** itself — beliefs are derived from evidence and are
-  therefore mutable and reconcilable. **The belief graph belongs in CURRENT_STATE, not the canonical
-  manifest.**
+- **CURRENT_STATE** holds the **belief graph** — but it is **not** the source of epistemic truth. The
+  authoritative store is the **immutable evidence/relation/transition log**; CURRENT_STATE is a
+  **derived, reproducible materialized view** of that log. If it is lost or suspect, it is discarded and
+  rebuilt by deterministic replay. **The belief graph belongs in CURRENT_STATE, not the canonical
+  manifest** — and CURRENT_STATE is never a second, mutable authority.
 
-Rule of thumb: the manifest is stable and rarely changes; the belief graph changes constantly and only
-ever through the reconciliation protocol the manifest defines.
+Rule of thumb: the manifest is stable and rarely changes; the authoritative log is append-only; the
+belief graph is a rebuildable projection that changes only through the reconciliation protocol the
+manifest defines. Making CURRENT_STATE mutable *authority* is exactly what creates reconciliation and
+rollback nightmares — so it is derived, not authoritative.
 
 ---
 
