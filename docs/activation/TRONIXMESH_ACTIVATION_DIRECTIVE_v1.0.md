@@ -1,21 +1,22 @@
 <!--
 CONFIDENTIAL — PRE-PATENT — DO NOT EXTERNALLY CIRCULATE
-Track-A production-governance activation. Build on already-disclosed Patent 1/2 architecture.
-Does not contain Patent-3 belief-graph/reconciliation schemas. See §Disclosure note.
+Track-A production-governance activation. Builds on already-disclosed Patent 1/2 architecture.
+Does not contain Patent-3 belief-graph/reconciliation schemas. See §1 Disclosure note.
 -->
 
 # TronixMesh Activation Directive
 
 **Artifact ID:** `TRONIXMESH_ACTIVATION_DIRECTIVE_v1.0`
-**Version:** 1.0 (consolidated + Patch Addendum v1.1 merged)
+**Version:** 1.0 (consolidated + Patch Addendum v1.1 merged; rev. 2026-08-16 incorporating Chairman-review feedback)
 **Status:** **PENDING CHAIRMAN LOCK — NON-CANONICAL**
 **Lock timestamp:** *(set at Chairman lock)*
 **Document hash:** *(SHA-256 generated at Chairman lock over the final approved bytes)*
 **Approving authority:** Christopher C. Leiser, Chairman
 **Prepared:** 2026-08-16 (synthesis)
-**Relationship to Canonical Manifest:** Not yet entered. On lock, this artifact is hashed and entered
-into the Canonical Manifest with an authority tier and effective epoch (see §11).
-**Change control:** Amendments require Chairman-approved change control (see §11.3).
+**Relationship to Canonical Manifest:** Not yet entered. On lock, hashed and entered with an authority tier and effective epoch (§11.3).
+**Change control:** Amendments require Chairman-approved change control (§11.3).
+
+**Patch provenance (Addendum v1.1 → sections):** P1→§2 · P2→§5 · P3→§3 · P4→§4 · P5→§6 · P6→§11 · P7→§7 · P8→§8.
 
 > **Authority status.** This directive is **PENDING / NON-CANONICAL**. BOB may prepare analysis from it
 > but SHALL NOT treat it as superior to existing locked canonical artifacts until Chairman lock, hash
@@ -25,31 +26,46 @@ into the Canonical Manifest with an authority tier and effective epoch (see §11
 
 ---
 
-## 0. Purpose
+## Decisions Required from Chairman (resolve at lock)
+
+These are the explicit decision points for the lock signature:
+
+1. **Final A10 shadow-coverage threshold** — freeze the observation period + workload count + coverage rule **before** shadow begins (§2.1).
+2. **Cutover scope** — approve `TRONIXMESH_BOB_CUTOVER_SCOPE_v1.0`: which workload classes are IN-SCOPE at initial cutover, and which are temporarily excluded and why (§5.1).
+3. **Cutover authority basis** — confirm whether production cutover runs on Phase B **bootstrap-grant** authority or requires the Phase C **Decision-Token** path (§11.2 flag).
+4. **Coordination mechanism** — confirm the decision rule (authoritative coordination required; PostgreSQL transactional authority vs Raft chosen **only after** inventory shows whether single-authority transactional semantics suffice; §8.1).
+5. **Runtime Spec v1.1 blockers** — approve/deny any Runtime Specification amendments that gate the critical path (external artifact; §11.1).
+6. **Disclosure / Track C** — direct the response to the public-repo exposure of the Patent-3-sensitive cognitive-mesh material now on `main` (Track C, §0; Paris deadline **2027-05-22**).
+
+---
+
+## 0. Purpose and track structure
 
 Get the **smallest defensible implementation** of TronixMesh governing **real BOB production effects** —
 with authorization, durable INTENT, attributable evidence, recovery, and reconstructability **proven
-before** expanding cognition. This document merges Patch Addendum v1.1 (Patches 1–8) into the
-consolidated Activation Directive and defines the objective gates that make "TronixMesh Alive"
-non-gameable.
+before** expanding cognition. Core principle: **get governance alive first; make it intelligent second.**
 
-**Scope discipline (locked):** the Epistemic / Cognitive Mesh track is **parallel and non-blocking** and
-is **not on the production critical path** (§7, §8). Cognitive Mesh experimentation SHALL NOT be placed
-on the production critical path.
+### 0.1 Three tracks
+
+| Track | Scope | Blocking relationship |
+|-------|-------|-----------------------|
+| **A — Production Governance** | The critical path to "TronixMesh Alive" (§8) | **The critical path.** Everything gates here |
+| **B — Epistemic / Cognitive Mesh** | Belief graph, reconciliation, cognitive channels (`../cognitive-mesh/`) | **Parallel and non-blocking**, except a genuine safety/governance defect via the §7 blocking-finding procedure. **SHALL NOT** sit on the production critical path |
+| **C — Patent / IP Protection** | Patent 3 filing + counsel review; controls external circulation of Track-B material | **Hard deadline 2027-05-22** (Paris Convention). Gates external disclosure of belief-graph/reconciliation specs |
 
 ---
 
 ## 1. Disclosure note (read first)
 
 This directive is Track-A production governance built on the **already-disclosed** coordinate-native
-governance architecture (Patents 1 & 2; see `../architecture/TRONIXMESH-ARCHITECTURE-v2.md`). It
-**deliberately excludes** the Patent-3-sensitive belief-graph / dependence-aware reconciliation schemas,
-which remain gated behind counsel review (see `../cognitive-mesh/`). Handle per the CONFIDENTIAL banner
-above; do not externally circulate before counsel review.
+governance architecture (Patents 1 & 2; `../architecture/TRONIXMESH-ARCHITECTURE-v2.md`). It
+**deliberately excludes** the Patent-3-sensitive belief-graph / dependence-aware reconciliation schemas
+(`../cognitive-mesh/`), which remain gated behind Track C. Handle per the CONFIDENTIAL banner; do not
+externally circulate before counsel review.
 
 ---
 
-## 2. A10 — Shadow Production *(Patch 1)*
+## 2. A10 — Shadow Production
 
 Run representative real BOB production workloads through the current production path (actual execution)
 and, simultaneously, the TronixMesh shadow path with **no external effect**:
@@ -72,13 +88,16 @@ TronixMesh shadow path →
 
 **Workload coverage.** Shadow evaluation must cover every BOB workload class intended to be governed at
 initial cutover, plus representative **allowed**, **denied**, **escalated**, **state-dependent**, and
-**failure** actions. A minimum observation period and workload count SHALL be **frozen before** shadow
-testing begins.
+**failure** actions.
 
-- Initial planning baseline: **≥ 3 consecutive operating days** and **≥ 100 representative
-  effect-bearing production requests**, or a larger sample if required to cover every declared workload
-  class.
-- The final threshold is a **judgment call requiring Chairman approval before testing begins**.
+> **FROZEN THRESHOLD (mandatory).** The exit threshold — observation period, workload count, and the
+> coverage rule — **SHALL be frozen and Chairman-approved before shadow testing begins**, and recorded in
+> the cutover-scope artifact (§5.1). It may not be adjusted after observing results.
+>
+> **Planning baseline for that freeze (subject to Chairman approval):** **≥ 3 consecutive operating days**
+> **and** **≥ 100 representative effect-bearing production requests**, **and** complete coverage of every
+> declared IN-SCOPE workload class — whichever is the larger requirement governs. A larger sample is used
+> if required to cover every declared class.
 
 **Decision comparison.** Every production external effect observed during shadow mode must have a
 corresponding TronixMesh authorization disposition. Every disagreement between what production actually
@@ -102,7 +121,7 @@ authorization is issued; each failure is recorded; the defect is remediated; aff
 
 ---
 
-## 3. A10.5 — Governed Staging Effect Trial *(Patch 3)*
+## 3. A10.5 — Governed Staging Effect Trial
 
 Shadow mode validates decisions but does not exercise the complete effect boundary. Before production
 cutover, run TronixMesh against a **real but isolated reversible** execution environment (throwaway Git
@@ -134,7 +153,7 @@ compensation **escalates rather than recursing**.
 
 ---
 
-## 4. Adversarial testing *(Patch 4)*
+## 4. Adversarial testing
 
 ### 4.1 Pre-Cutover Adversarial Suite (part of the A10 / A10.5 exit gate)
 
@@ -155,14 +174,14 @@ limits** and must not deliberately create uncontrolled external harm.
 
 ---
 
-## 5. "TronixMesh Alive" milestone & cutover scope *(Patch 2)*
+## 5. "TronixMesh Alive" milestone & cutover scope
 
 ### 5.1 Cutover-scope artifact (create before A11 cutover)
 
 Create **`TRONIXMESH_BOB_CUTOVER_SCOPE_v1.0`** declaring, per BOB workload class: whether it is governed
 by TronixMesh at cutover; which classes remain temporarily excluded and why; current external-effect
 volume attributable to each class; planned migration date for each excluded class; fallback behavior;
-and responsible owner.
+responsible owner; **and the frozen A10 exit threshold (§2.1).**
 
 **Cutover coverage rule.** Within every **IN-SCOPE** class, **100% of external effects** must pass
 through the TronixMesh Governance Gate. No alternate ungoverned execution path may exist for an in-scope
@@ -179,14 +198,15 @@ in-scope classes.
 **TRONIXMESH ALIVE** occurs when: (1) BOB performs real production work through TronixMesh; (2) all
 external effects in the declared cutover scope pass through the Governance Gate; (3) valid authorization
 is required; (4) durable INTENT precedes governed execution; (5) attributable RESULT evidence follows
-execution; (6) actions are reconstructable from authoritative evidence; (7) the pre-cutover gates have
-passed. The cutover-scope document is part of the evidence supporting the milestone.
+execution; (6) actions are **reconstructable from authoritative evidence, independent of BOB
+self-report**; (7) the pre-cutover gates have passed. The cutover-scope document is part of the evidence
+supporting the milestone.
 
 > **BOB CUTOVER = TRONIXMESH ALIVE.**
 
 ---
 
-## 6. A13 — 30-Day Pre-Registered Proof Period *(Patch 5)*
+## 6. A13 — 30-Day Pre-Registered Proof Period
 
 A13 SHALL NOT merely collect telemetry. Before the run begins, create
 **`TRONIXMESH_30_DAY_PROOF_PROTOCOL_v1.0`** and **freeze evaluation criteria before observing final
@@ -212,11 +232,11 @@ errors; provider ambiguity; governance latency overhead; evidence-writing overhe
 
 ---
 
-## 7. Track B blocking-dispute authority *(Patch 7)*
+## 7. Track B blocking-dispute authority (Blocking-Finding Procedure)
 
-Track B (Epistemic/Cognitive) may block Track A (production) when it discovers a defect affecting
-governance, authorization, evidence integrity, execution safety, effect-commit semantics, or
-reconstruction — subject to this adjudication rule.
+Track B may block Track A when it discovers a defect affecting governance, authorization, evidence
+integrity, execution safety, effect-commit semantics, or reconstruction — subject to this adjudication
+rule.
 
 **Blocking-finding procedure.** When Track B identifies a potential Track A blocker: (1) record the
 finding; (2) identify the affected invariant; (3) provide evidence; (4) identify plausible production
@@ -228,18 +248,19 @@ disputes. Technical evidence may be supplied by BOB, independent reviewers, deve
 results, or runtime evidence; final program disposition remains human-authorized unless delegated
 explicitly in canonical policy.
 
-**Default while disputed.** If the alleged defect could reasonably compromise authorization, identity,
-replay protection, governance integrity, evidence integrity, effect-commit semantics, execution safety,
-or reconstructability → **FAIL CLOSED (treat as blocking until adjudicated)**. For findings unrelated to
-those invariants, Track A may continue while adjudication occurs.
+**Default while disputed (tightened).** Any finding touching **authorization, identity, replay
+protection, governance integrity, evidence integrity, effect-commit semantics, execution safety, or
+reconstructability** defaults to **FAIL CLOSED**: treat as blocking **and pause all cutover-related work
+until adjudicated**. Findings **not** touching those invariants do **not** pause cutover work; Track A
+continues while adjudication proceeds.
 
 ---
 
-## 8. Critical path (pre-Alive) *(Patch 8)*
+## 8. Critical path (pre-Alive)
 
 ```
 Runtime blocker closure
-→ actual-state inventory                     (see §10)
+→ actual-state inventory                     (§10 — first executable work after lock)
 → verify existing identity/key/nonce/store components
 → RR-0056 Evidence Authority hardening
 → canonical state registry
@@ -260,12 +281,20 @@ production red-team rerun (A12)               (§4.2)
 → scope expansion
 ```
 
-The Epistemic/Cognitive track remains **parallel and non-blocking** except under the §7 blocking-finding
-procedure.
+Track B remains **parallel and non-blocking** except under the §7 blocking-finding procedure.
+
+### 8.1 Coordination-mechanism decision rule
+
+> **Authoritative coordination is required; the specific mechanism is chosen only after the inventory.**
+> PostgreSQL single-authority transactional semantics vs Raft (or equivalent distributed consensus) is
+> decided **only after** the actual-state inventory (§10) shows whether single-authority transactional
+> semantics suffice for the in-scope workload. **Distributed consensus is not a sophistication goal**;
+> prefer the simplest mechanism that guarantees authoritative, serializable commit. Do not adopt Raft as
+> a future "badge"; adopt it only if a concrete inventory finding requires it.
 
 ---
 
-## 9. Governance interpretation & denied-action lifecycle *(carried; deterministic-first)*
+## 9. Governance interpretation & denied-action lifecycle (deterministic-first)
 
 Governance interpretation is **deterministic first**; the epistemic reconciler does **not** arbitrate
 governance ambiguity. A cognitive process may propose an interpretation; the canonical governance
@@ -283,46 +312,51 @@ cognitive-mesh doctrine that governance constrains **action**, not **observation
 
 ---
 
-## 10. Section 22 — Repository / Implementation Inventory (evidence-based)
+## 10. Repository / Implementation Inventory (fulfils canonical Section 22)
 
 Actual-state inventory of this repository as of `origin/main` @ `be3bfad`. **Evidence over self-report.**
-Test evidence: `cd python && pytest` → **15 passed** (and **15 passed** with
-`TRONIX_VERIFY_SIGNATURES=1`), Python 3.12.3, pytest 9.1.1. Runtime commit of record for the Phase B
-primitives: `51485d4` ("Phase B Gate 0 signed + T0 runtime").
+Test evidence: `cd python && pytest` → **15 passed** (also **15 passed** with
+`TRONIX_VERIFY_SIGNATURES=1`), Python 3.12.3, pytest 9.1.1. Commit of record for the Phase B primitives:
+`51485d4` ("Phase B Gate 0 signed + T0 runtime").
 
-**Status legend:** `VERIFIED` (code + passing test) · `PARTIAL` (code present; incomplete vs the
-activation requirement) · `ABSENT` (not implemented in this repo).
+**Status legend (static vs operational evidence are distinct):**
+
+- `RUNTIME-VERIFIED` — exercised end-to-end in a **live/shadow** environment (strongest evidence). Available only from A10/A10.5 onward.
+- `UNIT-VERIFIED` — code present + passing **unit** test (static/functional evidence only; **not** operationally exercised).
+- `PARTIAL` — code present but incomplete versus the activation requirement.
+- `ABSENT` — not implemented in this repository.
+
+> **No component is `RUNTIME-VERIFIED` yet** — nothing here has been exercised in a live/shadow
+> environment. That status becomes attainable during A10/A10.5, not before.
 
 | Critical-path component | Status | Evidence / notes |
 |-------------------------|--------|------------------|
-| Coordinate addressing | **VERIFIED** | `python/tronixmesh/coordinate.py`; `tests/test_coordinate.py` (3 tests: parse/canonical, invalid-segment, sensitivity) |
-| Envelope + signatures (Ed25519) | **VERIFIED** | `envelope.py`, `signing.py`; `tests/test_envelope_adr0004.py` (sign/verify, tamper-fails-verify, frozen fields) |
-| Key component | **VERIFIED** | `signing.py` Ed25519 + HMAC-SHA256; sign/verify covered by envelope tests |
-| Store (append-only, hash-chained) | **VERIFIED** | `provenance.py` (SQLite; `verify_chain`); `tests/test_provenance.py` (chain integrity, tamper detected) |
-| Governance state machine (fail-closed) | **PARTIAL** | `governance.py` (`transition` fail-closed, `may_execute`); `tests/test_governance.py` (happy path, illegal transition, reviewers-cannot-execute). Not yet wired as a full Governance Gate over authorization envelopes + canonical-state lookup |
-| Channel + minimal authority handoff | **VERIFIED** (as Phase B bootstrap) | `channel.py`, `authority.py`, `handoff.py`; `tests/test_handoff.py` (authority-gated increase, denied without grant, UNROUTABLE). Decision Tokens deferred to Phase C |
+| Coordinate addressing | **UNIT-VERIFIED** | `python/tronixmesh/coordinate.py`; `tests/test_coordinate.py` (parse/canonical, invalid-segment, sensitivity) |
+| Envelope + signatures (Ed25519) | **UNIT-VERIFIED** | `envelope.py`, `signing.py`; `tests/test_envelope_adr0004.py` (sign/verify, tamper-fails-verify, frozen fields) |
+| Key component | **UNIT-VERIFIED** | `signing.py` Ed25519 + HMAC-SHA256; covered by envelope tests |
+| Store (append-only, hash-chained) | **UNIT-VERIFIED** | `provenance.py` (SQLite; `verify_chain`); `tests/test_provenance.py` (chain integrity, tamper detected) |
+| Governance state machine (fail-closed) | **PARTIAL** | `governance.py` (`transition` fail-closed, `may_execute`); `tests/test_governance.py`. Not yet wired as a Governance Gate over authorization envelopes + canonical-state lookup |
+| Channel + minimal authority handoff | **UNIT-VERIFIED** (Phase B bootstrap) | `channel.py`, `authority.py`, `handoff.py`; `tests/test_handoff.py`. Decision Tokens deferred to Phase C |
 | Identity / principal binding | **PARTIAL** | Coordinate + bootstrap-grant function identity only; no principal/credential registry or credential-bound `source_identity` |
-| **Nonce ledger / replay protection** | **ABSENT** | No nonce/replay module present. Design doctrine lists nonce ledger as a target; not implemented. **Required by the A10 fault matrix (duplicate nonce, replay).** |
-| **RR-0056 Evidence Authority (hardened)** | **PARTIAL** | `provenance.py` provides a SQLite hash chain (Phase B primitive). RR-0056 SECURITY-DEFINER Postgres append-only, tenant-scoped chains, external anchoring: **not implemented** |
-| **Canonical state registry (CURRENT_STATE)** | **ABSENT** | `registry.py` is a *coordinate/endpoint* registry, not a canonical authoritative-state store with versioned reads |
-| **Governance Gate (wired)** | **ABSENT** | State-machine kernel exists; a gate that requires valid authorization + canonical-state lookup for every in-scope external effect is not assembled |
+| **Nonce ledger / replay protection** | **ABSENT** | No nonce/replay module. **Required by the A10 fault matrix (duplicate nonce, replay).** |
+| **RR-0056 Evidence Authority (hardened)** | **PARTIAL** | `provenance.py` = SQLite hash chain (Phase B primitive). RR-0056 SECURITY-DEFINER Postgres append-only, tenant-scoped chains, external anchoring: **not implemented** |
+| **Canonical state registry (CURRENT_STATE)** | **ABSENT** | `registry.py` is a *coordinate/endpoint* registry, not an authoritative-state store with versioned reads |
+| **Governance Gate (wired)** | **ABSENT** | State-machine kernel exists; a gate requiring valid authorization + canonical-state lookup for every in-scope external effect is not assembled |
 | **Predictive Execution Wrapper (INTENT/RESULT)** | **ABSENT** | No durable INTENT-before-effect / RESULT-after-effect wrapper; no crash-boundary recovery |
-| **Reversible production adapter** | **ABSENT** | No adapter (e.g. throwaway Git / sandbox FS) implementing the A10.5 effect boundary |
+| **Reversible production adapter** | **ABSENT** | No adapter (throwaway Git / sandbox FS) implementing the A10.5 effect boundary |
 | Acceptance-test harness (activation) | **ABSENT** | 15 unit tests exist; no activation acceptance suite, shadow harness, fault-injection matrix, or adversarial suite |
-| Feature flags | **VERIFIED** | `flags.py` (`TRONIX_VERIFY_SIGNATURES`) exercised in handoff/verify paths |
+| Feature flags | **UNIT-VERIFIED** | `flags.py` (`TRONIX_VERIFY_SIGNATURES`) exercised in handoff/verify paths |
 
-**Runtime blocker closure** (first critical-path step) references the BOB-system runtime blocker, which
-is **external to this repository** and cannot be verified here; disposition pending access to the BOB
-Canonical Manifest system.
+**Runtime blocker closure** (first critical-path step) references the BOB-system runtime blocker,
+**external to this repository**; disposition pending access to the BOB Canonical Manifest system.
 
-**COMPLETE-claim rule honored:** no component above is marked complete without commit + passing-test
-evidence; `PARTIAL`/`ABSENT` items are explicitly not claimed complete. **No implementation-duration
-estimate is given**, per the immediate instruction — duration follows from remediating the `ABSENT`
-critical-path items once the runtime blocker is closed.
+**COMPLETE-claim rule honored:** no component is claimed operationally complete; `UNIT-VERIFIED` denotes
+static test evidence only, `PARTIAL`/`ABSENT` are explicitly incomplete, and `RUNTIME-VERIFIED` is
+reserved for live/shadow evidence not yet available. **No implementation-duration estimate is given.**
 
 ---
 
-## 11. Canonicalization *(Patch 6)*
+## 11. Canonicalization
 
 ### 11.1 Supersession matrix
 
@@ -331,40 +365,47 @@ This directive **amends specific clauses**; it does not wholesale-supersede prio
 
 | Artifact | Section | Prior Rule | New Rule | Reason | Authority |
 |----------|---------|-----------|----------|--------|-----------|
-| Consolidated Activation Directive | A10 Shadow Production | Open-ended shadow requirement, exitable by judgment | Objective A10 Exit Gate (frozen coverage/period/count; unresolved auth disagreement = 0; full fault matrix) | Prevent judgment-only cutover | Chairman |
-| Consolidated Activation Directive | Cutover / "Alive" | "Alive" undefined by workload coverage | `TRONIXMESH_BOB_CUTOVER_SCOPE_v1.0` + 100%-in-scope coverage rule + precise language | Milestone cannot be gamed | Chairman |
-| Consolidated Activation Directive | Effect testing | Shadow only (no real effects) | New **A10.5** governed staging effect trial (real reversible effects) before cutover | Close simulated-vs-real gap | Chairman |
-| Consolidated Activation Directive | Red-team (A12) | Attacks only post-cutover | Cheap/safe attacks moved into A10/A10.5 pre-cutover exit gate | Find defects before production | Chairman |
-| Consolidated Activation Directive | 30-day run (A13) | Telemetry collection | Pre-registered `TRONIXMESH_30_DAY_PROOF_PROTOCOL_v1.0` with zero-tolerance criteria | No post-selected success | Chairman |
-| Consolidated Activation Directive | Track A/B relationship | Track B may block Track A | Blocking-finding procedure + Chairman adjudication + fail-closed default | Balance safety vs progress | Chairman |
-| This directive | Governance | Unversioned normative message | Canonical artifact w/ hash + manifest entry (this §11) | Directives must be versioned/canonical | Chairman |
+| Consolidated Activation Directive | A10 Shadow Production | Open-ended shadow, exitable by judgment | Objective A10 Exit Gate (Chairman-frozen coverage/period/count; unresolved auth disagreement = 0; full fault matrix) | Prevent judgment-only cutover | Chairman |
+| Consolidated Activation Directive | Cutover / "Alive" | "Alive" undefined by workload coverage | `TRONIXMESH_BOB_CUTOVER_SCOPE_v1.0` + 100%-in-scope rule + precise language | Milestone cannot be gamed | Chairman |
+| Consolidated Activation Directive | Effect testing | Shadow only (no real effects) | New A10.5 governed staging effect trial | Close simulated-vs-real gap | Chairman |
+| Consolidated Activation Directive | Red-team (A12) | Attacks only post-cutover | Cheap/safe attacks moved into A10/A10.5 exit gate | Find defects before production | Chairman |
+| Consolidated Activation Directive | 30-day run (A13) | Telemetry collection | Pre-registered `TRONIXMESH_30_DAY_PROOF_PROTOCOL_v1.0` w/ zero-tolerance criteria | No post-selected success | Chairman |
+| Consolidated Activation Directive | Track A/B relationship | Track B may block Track A | Blocking-finding procedure + Chairman adjudication + fail-closed default that pauses cutover work | Balance safety vs progress | Chairman |
+| This directive | Governance | Unversioned normative message | Canonical artifact w/ hash + manifest entry (§11.3) | Directives must be versioned/canonical | Chairman |
 
-**Artifacts external to this repository** (in the BOB Canonical Manifest system) that MUST be inspected
-for clause-level conflict before lock — **conflict inspection pending access**, do not assume covered:
+**Prior artifacts requiring clause-level conflict inspection — list by exact title + date.** In-repo
+artifacts (dated) are inspected in §11.2. Artifacts **external to this repository** (BOB Canonical
+Manifest system) — **conflict inspection pending access; dates to be confirmed on access; do not assume
+covered:**
 
-- Operating Doctrine · Engineering Directive · Runtime Specification · OpenClaw Migration Plan ·
-  Acceptance Test Plan · previous activation/migration sequencing documents.
+- *TronixMesh Operating Doctrine* — (date pending access)
+- *TronixMesh Engineering Directive* — (date pending access)
+- *TronixMesh Runtime Specification* (incl. any v1.1) — (date pending access)
+- *OpenClaw Migration Plan* — (date pending access; **keep fallback language exactly as written therein**)
+- *Acceptance Test Plan* — (date pending access)
+- *Prior activation / migration sequencing documents* — (dates pending access)
 
-Example categories requiring reconciliation (per Patch 6): definition of "TronixMesh Alive";
-production-cutover sequencing; Cognitive Mesh relationship to production; Raft requirement or
-non-requirement; Evidence Authority sequencing; OpenClaw fallback rules; pre-cutover attack requirements.
+Categories requiring reconciliation (Patch 6): definition of "TronixMesh Alive"; production-cutover
+sequencing; Cognitive Mesh relationship to production; Raft requirement or non-requirement (§8.1);
+Evidence Authority sequencing; OpenClaw fallback rules; pre-cutover attack requirements.
 
-### 11.2 Conflict inspection against in-repo canonical/locked artifacts
+### 11.2 Conflict inspection against in-repo canonical/locked artifacts (title + date)
 
-| In-repo artifact | Potential conflict | Disposition |
-|------------------|--------------------|-------------|
-| `../architecture/TRONIXMESH-DESIGN-DOCTRINE.md` (trust stack, fail-closed, human sovereignty) | None — this directive is a strict application | Consistent |
-| `../architecture/TRONIXMESH-ARCHITECTURE-v2.md` (governance state machine, Decision Tokens, RR-0056) | "Alive" execution requires Decision Tokens; Phase B uses bootstrap grants | Cutover scope must state token vs bootstrap-grant posture for in-scope classes |
-| `../architecture/PHASE-B-SLICE.md` ("soft-launch / production deploy … staged rollout"; Decision Tokens deferred to Phase C) | This directive drives a production cutover using Phase B primitives | **Flag for Chairman:** confirm whether cutover is authorized on Phase B bootstrap-grant authority or requires the Phase C Decision-Token path |
-| `../phase-b/GATE-0-AUTHORIZATION.md` | Gate 0 authorized coding/T0, not production cutover | Production cutover is a new gate beyond Gate 0; requires its own authorization |
-| `../cognitive-mesh/` (Directive v0.9, Substrate v0.2) | Cognition must stay off critical path | Consistent — §7/§8 keep Track B non-blocking |
+| In-repo artifact (title — recorded date) | Potential conflict | Disposition |
+|------------------------------------------|--------------------|-------------|
+| *TronixMesh Design Doctrine* — 2026-07-17 | None — strict application of the trust stack / fail-closed / human sovereignty | Consistent |
+| *TronixMesh Comprehensive Architecture Write-Up v2.0* — 2026-07-17 | "Alive" execution vs Decision Tokens; Phase B uses bootstrap grants | Cutover scope must state token vs bootstrap-grant posture per in-scope class |
+| *Phase B Slice* — 2026-07-17 | Decision Tokens deferred to Phase C; production deploy is staged-rollout-gated | **Flag for Chairman (Decision 3):** confirm cutover authority basis |
+| *Gate 0 Authorization — Phase B* — 2026-07-17 | Gate 0 authorized coding/T0, not production cutover | Production cutover is a new gate requiring its own authorization |
+| *Cognitive Architecture Directive v0.9* — 2026-08-15 | Cognition must stay off critical path | Consistent — §7/§8 keep Track B non-blocking |
+| *Epistemic Substrate Spec v0.2* — 2026-08-15 | (Track B; Patent-3 sensitive) | Consistent; Track C controls its external disclosure |
 
 ### 11.3 Canonical Manifest entry (after Chairman lock)
 
 1. Hash the final directive (SHA-256 over approved bytes).
 2. Enter version + hash into the Canonical Manifest.
 3. Assign its authority tier.
-4. Mark superseded subordinate clauses (per §11.1).
+4. Mark superseded subordinate clauses (§11.1).
 5. Record effective epoch / time.
 
 Until all five complete, this directive remains **PENDING / NON-CANONICAL**. **Change control:**
@@ -373,21 +414,26 @@ wins over this directive unless Chairman-approved change control amends it.
 
 ---
 
-## 12. Disposition of the immediate instruction to BOB
+## 12. Disposition of the immediate instruction, and post-lock hand-off
 
 | # | Instruction | Disposition |
 |---|-------------|-------------|
 | 1 | Merge patches into the consolidated Activation Directive | Done — Patches 1–8 merged (§2–§9) |
-| 2 | Create the supersession matrix | Done — §11.1 (in-repo) + external-artifact list pending access |
-| 3 | Inspect Canonical Manifest & locked artifacts for conflicts | In-repo done (§11.2); BOB-system artifacts **pending access** — not assumed covered |
+| 2 | Create the supersession matrix | Done — §11.1 (in-repo, dated) + external-artifact list (titles; dates pending access) |
+| 3 | Inspect Canonical Manifest & locked artifacts for conflicts | In-repo done (§11.2); BOB-system artifacts **pending access** |
 | 4 | Return proposed `TRONIXMESH_ACTIVATION_DIRECTIVE_v1.0.md` | This document |
 | 5 | Mark PENDING CHAIRMAN LOCK | Done — header + §11.3 |
 | 6 | Repository/implementation inventory (Section 22) | Done — §10, evidence-based |
-| 7 | Support every COMPLETE claim with commit/test/runtime evidence | Done — §10 legend; only `VERIFIED` rows claim completeness |
+| 7 | Support every COMPLETE claim with commit/test/runtime evidence | Done — §10 legend distinguishes static vs operational evidence |
 
-**Constraints honored:** no new implementation begun; operational components not re-specified; unverified
-components not claimed complete; **no duration estimate**; Cognitive Mesh experimentation kept **off** the
-production critical path.
+**Post-lock hand-off (unambiguous).** After Chairman lock, the **first and only** executable work is the
+**actual-state inventory table (§10)** — verifying the status of existing components with commit/test/
+runtime evidence and producing the dependency-sequenced implementation table. **No Epistemic Substrate
+v0.2 drafting, no Reconciliation Protocol work, and no new high-level roadmaps** begin until that table
+is produced and reviewed. Track B proceeds only as non-blocking parallel work under §7. Do not begin new
+implementation merely because this directive exists; do not re-specify components already shown
+operational; do not claim unverified components complete; do not estimate duration until the inventory
+establishes what remains.
 
 ---
 
