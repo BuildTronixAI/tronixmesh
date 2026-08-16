@@ -11,3 +11,13 @@
 **Patented core:** Coordinate-native governance with embedded enforcement proof (US Provisional 64/072,487).
 
 **Disclosure:** Review Architecture v2.0 against patent claims before external publication.
+
+---
+
+## Research directions (non-normative, pending)
+
+These do **not** modify the normative doctrine above; they are approved directions under active design.
+
+| Direction | Status | Entry point |
+|-----------|--------|-------------|
+| Cognitive Mesh (belief graph, epistemic substrate, reconciliation) | Approved research direction / pending architecture | [`../cognitive-mesh/README.md`](../cognitive-mesh/README.md) |
